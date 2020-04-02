@@ -2,7 +2,8 @@ let BASE_URL = ''
 // const BASE_URL_DEVELOPMENT = ''
 // const BASE_URL_TEST = ''
 // const BASE_URL_PRODUCTION = ''
-const BASE_URL_ALL = 'http://47.96.165.40:8188'
+// const BASE_URL_ALL = 'http://47.96.165.40:8188'
+const BASE_URL_ALL = 'http://127.0.0.1:8188'
 
 switch (process.env.NODE_ENV) {
   case 'development':

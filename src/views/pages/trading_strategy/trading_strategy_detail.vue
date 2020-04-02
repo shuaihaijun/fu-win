@@ -5,7 +5,9 @@
           :summary="summary"
         )
       .trading-detail-container
-        DetailSide
+        DetailSide(
+          :summary="summary"
+        )
         DetailConternt(
           :summary="summary"
         )

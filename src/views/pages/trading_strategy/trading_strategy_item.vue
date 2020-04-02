@@ -1,11 +1,16 @@
 <template lang="pug">
   #e-trading-strategy-item
     router-link.trading-list-card(
-      :to="`/trading_strategy/detail/${info.signalId}`"
+      :to="detailUrl"
     )
       .trading-list-card-header
         .trading-list-card-info
-          .trading-list-card-nickname {{info.username}}
+          .trading-list-card-nickname(
+            v-if="type === 'trading'"
+          ) {{info.signalName}}
+          .trading-list-card-nickname(
+            v-if="type === 'follow'"
+          ) {{info.username}}
           .trading-list-card-level(
             v-if="type === 'trading'"
           ) {{info.level}}
@@ -18,7 +23,7 @@
         .trading-list-card-list
           .trading-list-card-list-item
             .trading-list-card-list-label 近13周最大回撤
-            .trading-list-card-list-balue 23%
+            .trading-list-card-list-balue {{info.historyWithdraw*100}}%
           .trading-list-card-list-item
             .trading-list-card-list-label 实盘跟随总额
             .trading-list-card-list-balue {{info.followsTradeAmount}}
@@ -44,11 +49,13 @@
 
 <script>
 import _config from '../../../base_config'
+import E from "../../../utils";
 
 export default {
   data() {
     return {
-      url: _config.BASE_URL
+      url: _config.BASE_URL,
+      detailUrl: ''
     }
   },
   props: {
@@ -59,7 +66,18 @@ export default {
       typr: String,
       default: 'trading'
     }
-  }
+  },
+    created() {
+        this.getDetailUrl()
+    },
+    methods: {
+        // 交易汇总
+        getDetailUrl() {
+            if (this.type === 'trading') {
+                this.detailUrl = '/trading_strategy/detail/' + this.info.signalId
+            }
+        }
+    }
 }
 </script>
 

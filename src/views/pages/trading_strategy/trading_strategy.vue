@@ -89,7 +89,9 @@ export default {
   data() {
     return {
       tradingList: [],
-      trandingRequest: {},
+      trandingRequest: {
+          pageSize: 8,
+          pageNo: 1},
       followList: [],
       followRequest: {
         pageSize: 4,

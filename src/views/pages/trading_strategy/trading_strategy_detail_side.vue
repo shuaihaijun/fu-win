@@ -4,29 +4,33 @@
       .trading-detail-side-title 交易账户
       .trading-detail-side-info
         .trading-detail-side-info-top
-          .trading-detail-side-info-name #2 交易员
+          .trading-detail-side-info-name # {{summary.signalId}} 交易员
           .trading-detail-side-info-level A
         .trading-detail-side-info-bottom
           .trading-detail-side-info-item
-            .trading-detail-side-info-label 收益率
-            .trading-detail-side-info-value 29%
+            .trading-detail-side-info-label 年化收益率
+            .trading-detail-side-info-value {{summary.annualizedExpectedReturn*100}}%
           .trading-detail-side-info-item
-            .trading-detail-side-info-label 跟随者收益
-            .trading-detail-side-info-value $0
+            .trading-detail-side-info-label 月均收益
+            .trading-detail-side-info-value {{summary.monthlyAverageIncome*100}}%
           .trading-detail-side-info-item
-            .trading-detail-side-info-label 近13周最大回撤
-            .trading-detail-side-info-value 0%
+            .trading-detail-side-info-label 历史最大回撤
+            .trading-detail-side-info-value {{summary.historyWithdraw*100}}%
           .trading-detail-side-info-item
             .trading-detail-side-info-label 累计订阅
-            .trading-detail-side-info-value 0
+            .trading-detail-side-info-value {{summary.signalFollows}}
       .trading-detail-side-disclaimer
         .trading-detail-side-disclaimer-title 重要免责声明
-        .trading-detail-side-disclaimer-context 外汇市场的保证金交易（含外汇交易、差价合约等）存在较高风险，不适合所有投资者。 您需为完全民事行为能力人， 能有效签署并遵守条款和所确认的合同。 本网站的网页内容（含数据部分）是 www.followme.cn 通过在不同经纪商获取的交易结果整理公布，所有信息仅供您参考，并无任何责任， 未经 Followme 许可不得使用或以任何形式出售。
+        .trading-detail-side-disclaimer-context 外汇市场的保证金交易（含外汇交易、差价合约等）存在较高风险，不适合所有投资者。 您需为完全民事行为能力人， 能有效签署并遵守条款和所确认的合同。 本网站的网页内容（含数据部分）是通过在不同经纪商获取的交易结果整理公布，所有信息仅供您参考，并无任何责任， 未经许可不得使用或以任何形式出售。
 </template>
 
 <script>
 export default {
-
+    props: {
+        summary: {
+            type: Object
+        }
+    }
 }
 </script>
 

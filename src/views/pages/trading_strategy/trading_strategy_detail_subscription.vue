@@ -10,27 +10,25 @@
       .sub-table
         .sub-table-header
           .sub-table-header-item 跟随者
-          .sub-table-header-item 经销商
-          .sub-table-header-item 跟随策略
-          .sub-table-header-item 已订阅天数
-          .sub-table-header-item 手数
-          .sub-table-header-item 跟随金额
-          .sub-table-header-item 跟随收益
-          .sub-table-header-item 收益对比
+          .sub-table-header-item 服务器
+          .sub-table-header-item 订阅时间
+          .sub-table-header-item 杠杆
+          .sub-table-header-item 余额
+          .sub-table-header-item 收益
+          .sub-table-header-item 净值
         .sub-table-body(
           v-if="subList.length > 0"
         )
           .sub-table-body-tr(
             v-for="sub in subList"
           )
-            .sub-table-body-td {{sub.userRefName}}
-            .sub-table-body-td {{sub.brokerName}}
-            .sub-table-body-td {{sub.userRefName}}
-            .sub-table-body-td {{sub.userRefName}}
-            .sub-table-body-td {{sub.userRefName}}
-            .sub-table-body-td {{sub.tradeAmount}}
+            .sub-table-body-td {{sub.refName}}
+            .sub-table-body-td.wrap {{sub.userServerName}}
+            .sub-table-body-td {{getDay(sub.createDate)}}
+            .sub-table-body-td {{sub.leverage}}
+            .sub-table-body-td {{sub.balance}}
             .sub-table-body-td {{sub.profit}}
-            .sub-table-body-td {{sub.userRefName}}
+            .sub-table-body-td {{sub.equity}}
         .sub-table-body.emety(
           v-else
         ) 没有数据
@@ -38,6 +36,7 @@
 
 <script>
 import E from '../../../utils'
+import moment from "moment";
 
 const subTypes = [
   {
@@ -79,6 +78,10 @@ export default {
         return 'active'
       }
     },
+      // 获取昨日的开始结束时间
+      getDay: function(date) {
+          return moment(date).format("YYYY-MM-DD")
+      },
     subTypeSelectHandler(val) {
       this.subRequest.ruleState = val
 
@@ -141,4 +144,12 @@ export default {
       &-td
         flex: 1
         padding: 0 10px
+        align-items: center
+
+        &.wrap
+          display: flex
+          flex-direction: column
+          justify-content: center
+          align-items: center
+          line-height: 16px
 </style>

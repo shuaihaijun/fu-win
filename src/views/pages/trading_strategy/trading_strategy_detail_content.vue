@@ -21,26 +21,29 @@
                 span.label 最大回撤
                 span.value < 25%
                 span.label 已遵守天数
-                span.value 43
+                span.value 9周
             .trading-detail-content-header-body-item
-              .trading-detail-content-header-body-item-title 交易策略
-              .trading-detail-content-header-body-item-context 交易策略顺势交易，小利集大利，注重仓位管理。如有跟随着请根据自己资金量的大小跟随，本人是1:200的杠杆。
+              .trading-detail-content-header-body-item-title 信号源简介
+              .trading-detail-content-header-body-item-context {{summary.signalDesc}}
+            .trading-detail-content-header-body-item
+              .trading-detail-content-header-body-item-title 交易团队
+              .trading-detail-content-header-body-item-context {{summary.signalTem}}
         .trading-detail-content-header-footer
           .trading-detail-content-header-footer-item
-            .trading-detail-content-header-footer-value 8.39%
+            .trading-detail-content-header-footer-value {{summary.monthlyAverageIncome*100}}%
             .trading-detail-content-header-footer-label 收益率
           .trading-detail-content-header-footer-item
-            .trading-detail-content-header-footer-value $0
-            .trading-detail-content-header-footer-label 实盘跟随总额
+            .trading-detail-content-header-footer-value {{summary.historyWithdraw*100}}%
+            .trading-detail-content-header-footer-label 最大回撤
           .trading-detail-content-header-footer-item
-            .trading-detail-content-header-footer-value 1.29%
-            .trading-detail-content-header-footer-label 近13周净值最大回撤
+            .trading-detail-content-header-footer-value {{summary.balance}}
+            .trading-detail-content-header-footer-label 账户当前余额
           .trading-detail-content-header-footer-item
-            .trading-detail-content-header-footer-value 18周
-            .trading-detail-content-header-footer-label 交易周期
+            .trading-detail-content-header-footer-value {{summary.equity}}
+            .trading-detail-content-header-footer-label 账户当前净值
           .trading-detail-content-header-footer-item
-            .trading-detail-content-header-footer-value 81
-            .trading-detail-content-header-footer-label 累计订阅次数
+            .trading-detail-content-header-footer-value {{summary.signalFollows}}
+            .trading-detail-content-header-footer-label 当前订阅人数
       .trading-detail-content-body
         .trading-detail-content-tab
           .trading-detail-content-tab-item(
@@ -54,7 +57,7 @@
           .trading-detail-content-item
             .trading-detail-content-title
               .trading-detail-content-title-name.summary 概览
-              .trading-detail-content-title-time 上一次更新时间 2020/03/01 GMT+08:00
+              .trading-detail-content-title-time 上一次更新时间 {{yesterDay}}
             .trading-detail-content-body
               Summary(
                 :summary="summary"
@@ -75,6 +78,7 @@ import Summary from './trading_strategy_detail_summary.vue'
 import Order from './trading_strategy_detail_order.vue'
 import Subscription from './trading_strategy_detail_subscription.vue'
 import E from '../../../utils'
+import moment from "moment";
 
 const tabs = [
   {
@@ -121,6 +125,7 @@ export default {
     return {
       chartsRadarData,
       tabs,
+      yesterDay:0,
       tabSelected: 0,
       valuation: null
     }
@@ -138,7 +143,7 @@ export default {
   },
   created() {
     this.signalId = this.$route.params.id
-
+    this.getYesterday()
     this.getValuationData()
   },
   methods: {
@@ -159,6 +164,10 @@ export default {
 
           console.log(this.chartsRadarData)
         })
+    },
+    // 获取昨日的开始结束时间
+    getYesterday() {
+      this.yesterDay = moment(moment().add(-1, 'days').startOf("day").valueOf()).format("YYYY-MM-DD");
     },
     tabActive(val) {
       if (val === this.tabSelected) {

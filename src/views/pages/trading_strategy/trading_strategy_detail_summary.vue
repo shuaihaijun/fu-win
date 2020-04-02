@@ -1,20 +1,32 @@
 <template lang="pug">
   .trading-detail-summary-table
     .trading-detail-summary-table-item
+      .trading-detail-summary-table-label 杠杆
+      .trading-detail-summary-table-value {{summary.leverage}}
+    .trading-detail-summary-table-item
+      .trading-detail-summary-table-label 余额
+      .trading-detail-summary-table-value ${{summary.balance}}
+    .trading-detail-summary-table-item
+      .trading-detail-summary-table-label 信用额
+      .trading-detail-summary-table-value ${{summary.credit}}
+    .trading-detail-summary-table-item
       .trading-detail-summary-table-label 收益
       .trading-detail-summary-table-value ${{summary.profit}}
     .trading-detail-summary-table-item
-      .trading-detail-summary-table-label 点数
-      .trading-detail-summary-table-value 点
+      .trading-detail-summary-table-label 净值
+      .trading-detail-summary-table-value ${{summary.equity}}
     .trading-detail-summary-table-item
+      .trading-detail-summary-table-label 保证金
+      .trading-detail-summary-table-value {{summary.margin}}
+    .trading-detail-summary-table-item
+      .trading-detail-summary-table-label 月均收益
+      .trading-detail-summary-table-value {{summary.monthlyAverageIncome*100}}%
+    .trading-detail-summary-table-item
+      .trading-detail-summary-table-label 最大回撤
+      .trading-detail-summary-table-value {{summary.historyWithdraw*100}}%
+    <!--.trading-detail-summary-table-item
       .trading-detail-summary-table-label 手数
       .trading-detail-summary-table-value {{summary.handLots}}标准手
-    .trading-detail-summary-table-item
-      .trading-detail-summary-table-label 交易胜率
-      .trading-detail-summary-table-value {{summary.winRate}}%
-    .trading-detail-summary-table-item
-      .trading-detail-summary-table-label 净值
-      .trading-detail-summary-table-value ${{summary.netValue}}
     .trading-detail-summary-table-item
       .trading-detail-summary-table-label 手续费
       .trading-detail-summary-table-value ${{summary.commission}}
@@ -24,9 +36,6 @@
     .trading-detail-summary-table-item
       .trading-detail-summary-table-label 净值盈亏比
       .trading-detail-summary-table-value {{summary.profit}}
-    .trading-detail-summary-table-item
-      .trading-detail-summary-table-label 余额
-      .trading-detail-summary-table-value ${{summary.overMoney}}
     .trading-detail-summary-table-item
       .trading-detail-summary-table-label 隔夜利息
       .trading-detail-summary-table-value $
@@ -61,17 +70,9 @@
       .trading-detail-summary-table-label 最大单笔获利
       .trading-detail-summary-table-value $
     .trading-detail-summary-table-item
-      .trading-detail-summary-table-label 杠杆
-      .trading-detail-summary-table-value {{summary.leverage}}
-    .trading-detail-summary-table-item
       .trading-detail-summary-table-label 交易期望值
-      .trading-detail-summary-table-value $
-    .trading-detail-summary-table-item
-      .trading-detail-summary-table-label 最大单笔持仓手数
-      .trading-detail-summary-table-value {{summary.handLots}}标准手
-    .trading-detail-summary-table-item
-      .trading-detail-summary-table-label 最大单笔亏损
-      .trading-detail-summary-table-value $
+      .trading-detail-summary-table-value $ -->
+
 </template>
 
 <script>

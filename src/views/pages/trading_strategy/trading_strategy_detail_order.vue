@@ -26,7 +26,7 @@
             v-for="ord in order"
           )
             .order-table-body-td {{ord.orderSymbol}}
-            .order-table-body-td {{ord.orderType}}
+            .order-table-body-td {{getOrderType(ord.orderType)}}
             .order-table-body-td {{ord.orderLots}}
             .order-table-body-td.wrap {{ord.orderOpenDate}}
             .order-table-body-td.wrap {{ord.orderCloseDate}}
@@ -60,6 +60,16 @@ export default {
   data() {
     return {
       orderTypes,
+      orderType: [
+          {
+              value: 0,
+              label: 'buy'
+          },
+          {
+              value: 1,
+              label: 'sell'
+          }
+      ],
       order: [],
       orderRequest: {
         orderState: 0
@@ -68,15 +78,23 @@ export default {
   },
   created() {
     this.orderRequest.signalId = this.$route.params.id
-
     this.getOrderData()
   },
   methods: {
     // 订单列表
     getOrderData() {
-      return E.handleRequest(E.api().post('orderSignal/getOrderSignal', this.orderRequest))
+        let params = this.orderRequest
+        let pageInfoHelper = {
+            pageSize: 20,
+            pageNo: 1
+        }
+        let data = {
+            params,
+            pageInfoHelper
+        }
+      return E.handleRequest(E.api().post('orderSignal/queryUserSignalOrder', data))
         .then(res => {
-          this.order = res.data.content.records
+          this.order = res.data.content.data
         })
     },
     activeClass(val) {
@@ -84,9 +102,19 @@ export default {
         return 'active'
       }
     },
+    getOrderType: function(dicKey) {
+        if (dicKey === null || dicKey === undefined || dicKey === '') {
+            return ''
+        }
+        let key = dicKey
+        for (let index = 0; index < this.orderType.length; index++) {
+            if (key === this.orderType[index].value) {
+                return this.orderType[index].label
+            }
+        }
+    },
     orderTypeSelectHandler(val) {
       this.orderRequest.orderState = val
-
       this.getOrderData()
     }
   }
