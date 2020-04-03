@@ -219,7 +219,7 @@ export default {
     padding: 0 20px
     border-bottom: 1px solid #e6e6e6
     font-size: 16px
-    color: #ff6200
+    color: #409EFF
 
     &-left,
     &-right
@@ -228,10 +228,10 @@ export default {
       cursor: pointer
 
     &-left
-      border-bottom: 2px solid #ff6200
+      border-bottom: 2px solid #409EFF
 
     &-right
-      color: #ff6200
+      color: #409EFF
 
   &-content
     padding: 8px 20px
@@ -256,7 +256,7 @@ export default {
 
       &.active
         color: #fff
-        background-color: #ff6200
+        background-color: #409EFF
 
     &-checkbox
       display: flex
@@ -265,8 +265,8 @@ export default {
       margin-right: 30px
 
       &.active .trading-filter-item-checkbox-inner
-        background-color: #ff6200
-        border: 1px solid #ff6200
+        background-color: #409EFF
+        border: 1px solid #409EFF
         position: relative
 
         &::after
@@ -305,5 +305,5 @@ export default {
       cursor: pointer
 
       &:hover
-        border: 1px solid #ff6200
+        border: 1px solid #409EFF
 </style>

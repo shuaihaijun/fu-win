@@ -49,7 +49,7 @@ export default {
     font-weight: 600
 
   &-info
-    border-left: 2px solid #ff6200
+    border-left: 2px solid #409EFF
     border-top: 1px solid #e9e9e9
     border-bottom: 1px solid #e9e9e9
     padding: 12px 20px

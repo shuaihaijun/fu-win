@@ -63,8 +63,8 @@ export default {
     cursor: pointer
 
     &.register
-      color: #ff6200
-      border: 1px solid #ff6200
+      color: #409EFF
+      border: 1px solid #409EFF
 
       &:hover
         background-color: #f05102
@@ -72,7 +72,7 @@ export default {
         color: #fff
 
     &.login
-      background-color: #ff6200
+      background-color: #409EFF
       color: #fff
 
       &:hover
@@ -116,7 +116,7 @@ export default {
       cursor: pointer
 
       &:hover
-        color: #ff6200
+        color: #409EFF
 
       &:last-child
         border-bottom: none

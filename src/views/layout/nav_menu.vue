@@ -21,7 +21,7 @@ export default {
           name: 'index'
         },
         {
-          text: '策略',
+          text: '大众交易',
           path: '/trading_strategy/list',
           name: 'tradingStrategy'
         },
@@ -69,14 +69,16 @@ export default {
   &-item
     height: 60px
     line-height: 60px
+    color: #fff
     padding: 0 12px
     cursor: pointer
+    font-size: 15px
 
     &:hover
-      background-color: #f5efeb
+      background-color: #696969
 
     &.active
-      color: #ff6200
+      color: #409EFF
 </style>
 
 

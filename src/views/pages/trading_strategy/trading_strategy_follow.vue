@@ -37,7 +37,6 @@ export default {
     getFollowList() {
       return E.handleRequest(E.api().post('signal/queryFollowUsers', this.followRequest))
         .then(res => {
-          console.log(res)
           this.followList = res.data.content.data
         })
     },

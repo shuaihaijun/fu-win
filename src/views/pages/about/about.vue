@@ -15,21 +15,21 @@
           .about-statistics
             .about-statistics-item
               img.about-statistics-item-img(
-                src="../../../assets/images/about-icon1.svg"
+                src="../../../assets/images/people.svg"
               )
               .about-statistics-item-info
                 .about-statistics-item-num {{info.userActive}}
                 .about-statistics-item-text 活跃账户数
             .about-statistics-item
               img.about-statistics-item-img(
-                src="../../../assets/images/about-icon1.svg"
+                src="../../../assets/images/order.svg"
               )
               .about-statistics-item-info
                 .about-statistics-item-num {{info.orderTotel}}
                 .about-statistics-item-text 订单量（笔）
             .about-statistics-item
               img.about-statistics-item-img(
-                src="../../../assets/images/about-icon1.svg"
+                src="../../../assets/images/amount.svg"
               )
               .about-statistics-item-info
                 .about-statistics-item-num ${{info.orderAmount}}
@@ -58,7 +58,6 @@ export default {
     this.year = now.getFullYear()
     E.handleRequest(E.api().get('com/getActive'))
       .then(res => {
-        console.log(res)
         this.info = res.data.content
       })
   }
@@ -86,12 +85,13 @@ export default {
     &-item
       display: flex
       flex: 1
+      align-items: center
 
       &-img
         margin-right: 8px
 
       &-num
-        color: #ff6200
+        color: #409EFF
         font-weight: 500
         font-size: 48px
 

@@ -64,7 +64,7 @@ export default {
     left: 0
     padding: 0 24px
     z-index: 200
-    background-color: #fff
+    background-color: #282828
     box-shadow: 0 1px 0 0 #e6e6e6
 
     &.transparent
@@ -94,7 +94,7 @@ export default {
         color: #fff
 
         &.active
-          color: #ff6200
+          color: #409EFF
 
       .menu-item:hover
         background-color: rgba(245, 239, 235, .3)

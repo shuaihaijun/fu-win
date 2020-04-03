@@ -49,7 +49,6 @@ export default {
 
       E.handleRequest(E.api().post('admin/login', this.request))
         .then(res => {
-          console.log(res)
 
           if (res.data.code === 200001) {
             this.$message.warning(res.data.message)
@@ -87,7 +86,7 @@ export default {
     position: absolute
     top: 20px
     right: 30px
-    color: #FF6200
+    color: #409EFF
     font-size: 16px
 
   &-content
@@ -111,12 +110,12 @@ export default {
       height: 100%
       padding: 0 20px
       outline: none
-      caret-color: #FF6200
+      caret-color: #409EFF
       box-sizing: border-box
       font-size: 14px
 
   &-btn
-    background-color: #FF6200
+    background-color: #409EFF
     border-radius: 2px
     width: 100%
     height: 50px

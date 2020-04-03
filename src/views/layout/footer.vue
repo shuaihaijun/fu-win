@@ -2,8 +2,8 @@
   #e-footer
     .footer
       .footer-content
-        .footer-sub 交易不再孤单
-        .footer-copyright © 2020 Follow Me Technology Ltd. All Rights Reserved. 投资有风险，入市需谨慎
+        .footer-sub 交易创造奇迹
+        .footer-copyright © 2020. All Rights Reserved. 投资有风险，入市需谨慎
 </template>
 
 <style lang="sass" scoped>

@@ -108,8 +108,8 @@ export default {
       cursor: pointer
 
       &.active
-        border: 1px solid #ff6200
-        color: #ff6200
+        border: 1px solid #409EFF
+        color: #409EFF
 
   &-table
     font-size: 12px

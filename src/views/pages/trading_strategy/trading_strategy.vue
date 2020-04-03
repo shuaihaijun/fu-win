@@ -117,7 +117,6 @@ export default {
     getTradingList() {
       return E.handleRequest(E.api().post('signal/querySignalUsers', this.trandingRequest))
         .then(res => {
-          console.log(res.data.content.data)
           this.tradingList = res.data.content.data
         })
     },
@@ -125,7 +124,6 @@ export default {
     getFollowList() {
       return E.handleRequest(E.api().post('signal/queryFollowUsers', this.followRequest))
         .then(res => {
-          console.log(res)
           this.followList = res.data.content.data
         })
     },
@@ -133,7 +131,6 @@ export default {
     getBrokerList() {
       return E.handleRequest(E.api().post('comServer/queryBroker', {}))
         .then(res => {
-          console.log(res)
           this.brokerList = res.data.content.data
           this.brokerList.forEach(item => {
             const obj = {}

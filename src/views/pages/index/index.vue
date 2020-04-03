@@ -4,7 +4,7 @@
       .index-header
         .index-header-bk
         .index-header-content
-          .index-header-title FollowQuant
+          .index-header-title Trade Copier
             span.index-header-title-sub TM
           .index-header-sub-title 基于用户交易数据分析的量化策略开发平台与智能交易全流程解决方案的服务提供商，帮助企业提升风控管理与业务盈利能力。
           .index-header-btn
@@ -26,7 +26,7 @@ export default {
 .index
 
   &-header
-    height: 713px
+    height: 820px
     background: url('../../../assets/images/header.png') no-repeat center center
     background-size: cover
     position: relative
@@ -78,7 +78,7 @@ export default {
         width: 224px
         height: 65px
         line-height: 65px
-        background: #ff6200
+        background: #409EFF
         cursor: pointer
 </style>
 

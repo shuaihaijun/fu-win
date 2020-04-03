@@ -182,14 +182,14 @@ export default {
 
       &-btn
         font-size: 14px
-        color: #ff6022
+        color: #409EFF
         border-radius: 16px
-        border: 1px solid #ff6022
+        border: 1px solid #409EFF
         padding: 5px 12px
         cursor: pointer
         transition: all ease .3s
 
         &:hover
-          background-color: #ff6022
+          background-color: #409EFF
           color: #fff
 </style>

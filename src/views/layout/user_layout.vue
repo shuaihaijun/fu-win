@@ -8,7 +8,7 @@
       .user-content
         slot
       .user-footer
-        .user-copyright © 2020 Follow Me Technology Ltd. All Rights Reserved. 投资有风险，入市需谨慎
+        .user-copyright © 2020. All Rights Reserved. 投资有风险，入市需谨慎
 </template>
 
 <script>

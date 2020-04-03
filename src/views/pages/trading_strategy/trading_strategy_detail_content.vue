@@ -109,7 +109,7 @@ const chartsRadarData = {
     {
       type: 'radar',
       areaStyle: {
-        color: '#ff6200'
+        color: '#409EFF'
       },
       data: [
         {
@@ -282,8 +282,8 @@ export default {
       cursor: pointer
 
       &.active
-        border-bottom: 2px solid #ff6200
-        color: #ff6200
+        border-bottom: 2px solid #409EFF
+        color: #409EFF
 
   &-tab-context
     padding: 25px 30px

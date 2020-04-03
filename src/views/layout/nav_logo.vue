@@ -4,7 +4,7 @@
       to="/"
     )
       img.logo(
-        src="../../assets/images/logo.svg"
+        src="../../assets/images/fengxian.svg"
         :style='logoStyle'
       )
 </template>
