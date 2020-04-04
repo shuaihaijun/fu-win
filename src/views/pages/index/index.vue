@@ -8,7 +8,7 @@
             span.index-header-title-sub TM
           .index-header-sub-title 基于用户交易数据分析的量化策略开发平台与智能交易全流程解决方案的服务提供商，帮助企业提升风控管理与业务盈利能力。
           .index-header-btn
-            router-link.index-header-btn-item(to="/") 在线申请
+            router-link.index-header-btn-item(to="/user/registe") 在线申请
             router-link.index-header-btn-item(to="/user/login") 登录
 </template>
 

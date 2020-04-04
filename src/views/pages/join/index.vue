@@ -7,7 +7,9 @@
           .index-header-title Trade Copier
             span.index-header-title-sub TM
           .index-header-sub-title 基于用户交易数据分析的量化策略开发平台与智能交易全流程解决方案的服务提供商，帮助企业提升风控管理与业务盈利能力。
-          .index-header-btn
+          .index-header-btn(
+            v-if="userInfo === null"
+          )
             router-link.index-header-btn-item(to="/user/registe") 在线申请
             router-link.index-header-btn-item(to="/user/login") 登录
 </template>
@@ -18,7 +20,20 @@ import BaseLayout from '../../layout/base_layout.vue'
 export default {
   components: {
     BaseLayout
-  }
+  },
+    data() {
+        return {
+            userInfo: null
+        }
+    },
+    created() {
+        const storage = window.localStorage
+        const userInfo = storage.getItem('follow_user_info')
+
+        if (userInfo !== null) {
+            this.userInfo = JSON.parse(userInfo)
+        }
+    }
 }
 </script>
 

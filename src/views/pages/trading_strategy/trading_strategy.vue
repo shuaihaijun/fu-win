@@ -108,6 +108,9 @@ export default {
     TradingItem
   },
   created() {
+    if(this.$route.query.token !== null && this.$route.query.token !== ''&& this.$route.query.token !== undefined){
+        this.getTokenLogin(this.$route.query.token)
+    }
     this.getTradingList()
     this.getFollowList()
     this.getBrokerList()
@@ -140,6 +143,27 @@ export default {
             this.filterBroker.push(obj)
           })
         })
+    },
+    getTokenLogin(token) {
+        let params = {
+            token
+        }
+        let data = {
+            params
+        }
+        E.handleRequest(E.api().post('admin/tokenLogin', data))
+            .then(res => {
+                console.log(res.data)
+                if (res.data.status !== 0) {
+                    this.$message.warning(res.data.msg)
+                } else {
+                    const storage = window.localStorage
+                    storage.setItem('follow_user_info', JSON.stringify(res.data.content.data))
+                    this.$router.push({
+                        name: 'tradingStrategy'
+                    })
+                }
+            })
     },
     // 筛选列表
     filterHandler(data) {

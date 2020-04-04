@@ -6,60 +6,60 @@
       ) 登录
       .registe-content
         .registe-title Hi, 欢迎加入我们
-        .registe-item
+        .registe-item 邀请码:
           input(
             type="text"
-            placeholder='姓名'
-            v-model="request.username"
-          )
-        .registe-item
-          input(
-            type="text"
-            placeholder='介绍人ID'
+            placeholder='请输入邀请码'
             v-model="request.introducer"
           )
-        .registe-item
+        .registe-item 用户名:
           input(
             type="text"
-            placeholder='昵称'
+            placeholder='请输入用户名'
+            v-model="request.username"
+          )
+        .registe-item 密码:
+          input(
+            type="password"
+            placeholder='请输入密码'
+            v-model="request.password"
+          )
+        .registe-item 确认密码:
+          input(
+            type="password"
+            placeholder='请输入确认密码'
+            v-model="request.password2"
+          )
+        .registe-item 昵称:
+          input(
+            type="text"
+            placeholder='请输入昵称'
             v-model="request.refName"
           )
-        .registe-item
+        .registe-item  手机号:
           input(
             type="num"
             maxlength='11'
-            placeholder='手机号'
+            placeholder='请输入手机号'
             v-model="request.mobile"
           )
-        .registe-item
+        .registe-item Email:
           input(
             type="text"
-            placeholder='省份'
-            v-model="request.province"
-          )
-        .registe-item
-          input(
-            type="text"
-            placeholder='城市'
-            v-model="request.city"
-          )
-        .registe-item
-          input(
-            type="text"
-            placeholder='Email'
+            placeholder='请输入Email'
             v-model="request.email"
           )
-        .registe-item
+        .registe-item 省份:
           input(
-            type="password"
-            placeholder='密码'
-            v-model="request.password"
+            type="text"
+            placeholder='请输入省份'
+            v-model="request.province"
           )
-        .registe-item
+        .registe-item 城市:
           input(
-            type="password"
-            placeholder='确认密码'
-            v-model="request.password2"
+            type="text"
+            placeholder='请输入城市'
+            v-model="request.city"
           )
       .registe-btn(
         @click="registeHandler"
@@ -92,9 +92,12 @@ export default {
         username: '',
         refName: '',
         mobile: '',
+        introducer: '',
         email: '',
         password: '',
-        password2: ''
+        password2: '',
+        province: '',
+        city: ''
       }
     }
   },
@@ -102,57 +105,85 @@ export default {
     agreementHandler() {
       this.agreementShow = !this.agreementShow
     },
+    validPhone: function (value){ // 手机号验证
+          if (!value) {
+              this.$message.warning('请输入电话号码')
+          } else {
+              var reg = /^1[3|4|5|7|6|8][0-9]\d{8}$/
+              var reg2 = /^((0\d{2,3})-)?(\d{7,8})(-(\d{3,}))?$/
+              if (reg2.test(value) || reg.test(value)) {
+                  return true
+              }
+              return false
+          }
+      },
+      validEmail: function (value){
+          if (!value) {
+              this.$message.warning('请正确填写邮箱')
+          } else {
+              if (value !== '') {
+                  var reg = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
+                  if (reg.test(value)) {
+                      return true
+                  }
+              }
+              return false
+          }
+      },
+      introducerDecode: function(value) {
+          let Base64 = require('js-base64').Base64
+          return Base64.decode(value)  //
+      },
     registeHandler() {
       if (this.request.username === '') {
         this.$message.warning('请输入姓名')
         return false
       }
-
       if (this.request.introducer === '') {
-        this.$message.warning('请输入介绍人ID')
+        this.$message.warning('请输入邀请码')
         return false
       }
-
+        if (this.request.password === '') {
+            this.$message.warning('请输入密码')
+            return false
+        }
+        if (this.request.password2 === '') {
+            this.$message.warning('请确认密码')
+            return false
+        }
       if (this.request.refName === '') {
         this.$message.warning('请输入昵称')
         return false
       }
-
       if (this.request.mobile === '') {
         this.$message.warning('请输入手机号')
         return false
       }
-
       if (this.request.email === '') {
         this.$message.warning('请输入邮箱')
         return false
       }
-
-      if (this.request.password === '') {
-        this.$message.warning('请输入密码')
-        return false
-      }
-
-      if (this.request.password2 === '') {
-        this.$message.warning('请确认密码')
-        return false
-      }
-
       if (this.request.password !== this.request.password2) {
         this.$message.warning('两次输入的密码不一致')
         return false
       }
-
-      E.handleRequest(E.api().post('admin/registered', this.request))
+      if(!this.validPhone(this.request.mobile)){
+          this.$message.warning('请输入正确格式的手机号')
+          return false
+      }
+      if(!this.validEmail(this.request.email)){
+          this.$message.warning('请输入正确格式的邮箱')
+          return false
+       }
+        let params = this.request
+        params.introducer = this.introducerDecode(this.request.introducer)
+      E.handleRequest(E.api().post('admin/registered', params))
         .then(res => {
-
-          if (res.data.code === 101) {
+          if (res.data.code !== 0) {
             this.$message.warning(res.data.message)
           } else {
             const storage = window.localStorage
-
             storage.setItem('follow_user_info', JSON.stringify(res.data.content.data))
-
             this.$router.push({
               name: 'tradingStrategy'
             })
@@ -168,7 +199,7 @@ export default {
 
   &-container
     width: 100%
-    padding: 50px 215px
+    padding: 50px 180px
     position: relative
 
   &-login
@@ -180,6 +211,7 @@ export default {
 
   &-content
     margin-bottom: 30px
+    text-align: right
 
   &-title
     font-size: 24px
@@ -187,7 +219,6 @@ export default {
 
   &-item
     height: 48px
-    border: 1px solid #ebebeb
     border-radius: 2px
     margin-bottom: 12px
 
@@ -195,9 +226,11 @@ export default {
       margin-bottom: 0
 
     input
-      width: 100%
+      width: 85%
       height: 100%
+      background-color: #f2f2f270
       padding: 0 20px
+      border: 1px solid #ebebeb
       outline: none
       caret-color: #409EFF
       box-sizing: border-box
@@ -206,6 +239,7 @@ export default {
   &-agreement
     margin-top: 12px
     color: #999
+    text-align: center
 
     .click
       cursor: pointer

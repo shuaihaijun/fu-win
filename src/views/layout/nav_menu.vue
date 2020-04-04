@@ -65,7 +65,6 @@ export default {
                   newUrl = newUrl + '?token='+userData.token
               }
           }
-        console.log(newUrl)
         window.open(newUrl)
       } else {
           this.$router.push({
