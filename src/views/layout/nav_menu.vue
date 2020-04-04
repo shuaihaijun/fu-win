@@ -11,24 +11,30 @@
 </template>
 
 <script>
+import _config from '../../base_config'
 export default {
   data() {
     return {
+      crmUrl:_config.CRM_URL,
       menus: [
         {
-          text: '首页',
-          path: '/',
-          name: 'index'
+          text: '交易策略',
+          path: '/trading_strategy',
+          name: 'tradingStrategy'
         },
         {
-          text: '大众交易',
-          path: '/trading_strategy/list',
-          name: 'tradingStrategy'
+          text: '加入我们',
+          path: '/join',
+          name: 'join'
         },
         {
           text: '关于我们',
           path: '/about',
           name: 'about'
+        },
+        {
+          text: 'CRM',
+          name: 'crm'
         }
       ],
       routeName: ''
@@ -36,7 +42,6 @@ export default {
   },
   created() {
     this.routeName = this.$route.matched[0].name
-
     this.$router.afterEach((to, from) => {
       this.routeName = to.matched[0].name
     })
@@ -51,9 +56,22 @@ export default {
       }
     },
     routeTo(name) {
-      this.$router.push({
-        name
-      })
+      if(name === 'crm'){
+          let newUrl = this.crmUrl
+          const userInfo = window.localStorage.getItem('follow_user_info')
+          if (userInfo !== null) {
+              let userData = JSON.parse(userInfo)
+              if (userData.token !==null) {
+                  newUrl = newUrl + '?token='+userData.token
+              }
+          }
+        console.log(newUrl)
+        window.open(newUrl)
+      } else {
+          this.$router.push({
+              name
+          })
+      }
     }
   }
 }

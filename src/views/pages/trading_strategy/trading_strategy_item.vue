@@ -17,7 +17,7 @@
           .trading-list-card-server {{info.brokerName}}
         .trading-list-card-avatar
           img(
-            :src="info.avatarUrl ? url + info.avatarUrl : null"
+            :src="info.avatarUrl ? url + info.avatarUrl : avatar"
           )
       .trading-list-card-content
         .trading-list-card-list
@@ -49,12 +49,13 @@
 
 <script>
 import _config from '../../../base_config'
-import E from "../../../utils";
+import avatar from '../../../assets/images/avatar-default.svg'
 
 export default {
   data() {
     return {
       url: _config.BASE_URL,
+      avatar,
       detailUrl: ''
     }
   },

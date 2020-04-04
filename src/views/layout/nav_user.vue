@@ -15,10 +15,11 @@
           )
         .nav-user-name {{userInfo.refName}}
         .nav-user-menu
-          .nav-user-menu-item 退出
+          .nav-user-menu-item(@click="logout()") 退出
 </template>
 
 <script>
+import E from '../../utils'
 import avatar from '../../assets/images/avatar-default.svg'
 
 export default {
@@ -40,7 +41,23 @@ export default {
 
   },
   methods: {
-
+    logout() {
+        let userInfo = window.localStorage.getItem('follow_user_info')
+        if(userInfo==null) {
+            this.$message.warning('用户未登录！')
+            return
+        }
+        let params = JSON.parse(userInfo)
+        E.handleRequest(E.api().post('admin/logout', params))
+            .then(res => {
+                if (res.data.code === 200001) {
+                    this.$message.warning(res.data.message)
+                } else {
+                    window.localStorage.removeItem('follow_user_info')
+                    this.$router.go(0)
+                }
+            })
+    }
   }
 }
 </script>
@@ -99,6 +116,9 @@ export default {
       width: 100%
       height: 100%
 
+  &-name
+      color: #fff
+
   &-menu
     position: absolute
     top: 100%
@@ -108,8 +128,9 @@ export default {
     border-top: 1px solid #e9e9e9
 
     &-item
-      min-width: 140px
+      min-width: 100px
       height: 50px
+      align-content: center
       line-height: 50px
       padding: 0 20px
       border-bottom: 1px solid #e9e9e9

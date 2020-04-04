@@ -115,6 +115,7 @@ export default {
   methods: {
     // 交易员列表
     getTradingList() {
+      this.trandingRequest.pageSize = 8
       return E.handleRequest(E.api().post('signal/querySignalUsers', this.trandingRequest))
         .then(res => {
           this.tradingList = res.data.content.data

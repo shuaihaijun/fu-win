@@ -27,7 +27,7 @@ export default {
 
   &-header
     height: 820px
-    background: url('../../../assets/images/header.png') no-repeat center center
+    background: url('../../../assets/images/header2.jpg') no-repeat center center
     background-size: cover
     position: relative
 
@@ -53,7 +53,7 @@ export default {
       font-size: 18px
 
     &-title
-      font-size: 82px
+      font-size: 50px
       font-weight: 500
       position: relative
       padding: 16px 0
@@ -75,7 +75,7 @@ export default {
         display: block
         font-size: 18px
         color: #fff
-        width: 224px
+        width: 200px
         height: 65px
         line-height: 65px
         background: #409EFF

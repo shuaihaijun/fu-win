@@ -58,7 +58,7 @@ export default {
             storage.setItem('follow_user_info', JSON.stringify(res.data.content.data))
 
             this.$router.push({
-              name: 'index'
+              name: 'tradingStrategy'
             })
           }
         })

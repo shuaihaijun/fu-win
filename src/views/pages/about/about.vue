@@ -6,7 +6,7 @@
       .about-container
         .about-header
           video(
-            src="../../../assets/video/about.mp4"
+            src="../../../assets/video/earth.mp4"
             autoplay="autoplay"
             muted="muted"
             loop="loop"

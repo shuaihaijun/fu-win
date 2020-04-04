@@ -19,7 +19,7 @@
               .trading-detail-content-header-body-item-title 账户承诺
               .trading-detail-content-header-body-item-context
                 span.label 最大回撤
-                span.value < 25%
+                span.value < {{summary.historyWithdraw*100}}%
                 span.label 已遵守天数
                 span.value 9周
             .trading-detail-content-header-body-item

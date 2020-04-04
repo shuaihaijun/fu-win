@@ -7,6 +7,14 @@ const base = isTest ? '/dist' : '/'
 
 Vue.use(Router)
 
+/**
+ * 重写路由的push方法
+ */
+const routerPush = Router.prototype.push
+Router.prototype.push = function push(location) {
+  return routerPush.call(this, location).catch(error=> error)
+}
+
 const router = new Router({
   routes,
   base: base,
