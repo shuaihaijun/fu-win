@@ -185,7 +185,7 @@ export default {
             const storage = window.localStorage
             storage.setItem('follow_user_info', JSON.stringify(res.data.content.data))
             this.$router.push({
-              name: 'tradingStrategy'
+              name: 'index'
             })
           }
         })

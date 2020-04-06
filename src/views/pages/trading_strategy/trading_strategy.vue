@@ -153,14 +153,13 @@ export default {
         }
         E.handleRequest(E.api().post('admin/tokenLogin', data))
             .then(res => {
-                console.log(res.data)
                 if (res.data.status !== 0) {
                     this.$message.warning(res.data.msg)
                 } else {
                     const storage = window.localStorage
                     storage.setItem('follow_user_info', JSON.stringify(res.data.content.data))
                     this.$router.push({
-                        name: 'tradingStrategy'
+                        name: 'index'
                     })
                 }
             })

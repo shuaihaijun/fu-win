@@ -34,17 +34,17 @@ export default {
 
   &-header
     display: flex
-    background-color: rgba(0, 0, 0, .5)
+    background-color: rgba(0, 0, 0, 0.67)
 
     &-container
       display: flex
       width: 1200px
       margin: 0 auto
-      padding: 30px 0
+      padding: 20px 0
 
     &-avatar
-      width: 160px
-      height: 160px
+      width: 100px
+      height: 100px
       border-radius: 50%
       overflow: hidden
       background-color: #eee

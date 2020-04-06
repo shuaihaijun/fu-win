@@ -17,15 +17,15 @@ export default {
     return {
       crmUrl:_config.CRM_URL,
       menus: [
+          {
+              text: '首页',
+              path: '/index',
+              name: 'index'
+          },
         {
           text: '交易策略',
           path: '/trading_strategy',
           name: 'tradingStrategy'
-        },
-        {
-          text: '加入我们',
-          path: '/join',
-          name: 'join'
         },
         {
           text: '关于我们',

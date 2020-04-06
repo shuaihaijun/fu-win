@@ -64,7 +64,7 @@ export default {
       type: Object
     },
     type: {
-      typr: String,
+      type: String,
       default: 'trading'
     }
   },

@@ -1,14 +1,10 @@
 export default [
   {
     path: '/',
-    redirect: '/trading_strategy/list'
-  },
-  {
-    path: '/join',
-    component: () => import('../views/pages/join/index.vue'),
-    name: 'join',
+    component: () => import('../views/pages/index/index.vue'),
+    name: 'index',
     meta: {
-      title: '加入我们'
+      title: '首页'
     }
   },
   {
