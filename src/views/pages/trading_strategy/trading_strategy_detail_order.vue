@@ -28,8 +28,8 @@
             .order-table-body-td {{ord.orderSymbol}}
             .order-table-body-td {{getOrderType(ord.orderType)}}
             .order-table-body-td {{ord.orderLots}}
-            .order-table-body-td.wrap {{ord.orderOpenDate}}
-            .order-table-body-td.wrap {{ord.orderCloseDate}}
+            .order-table-body-td.wrap {{getDateTime(ord.orderOpenDate)}}
+            .order-table-body-td.wrap {{getDateTime(ord.orderCloseDate)}}
             .order-table-body-td.wrap
               .order-table-body-td-item {{ord.orderOpenPrice}}
               .order-table-body-td-item {{ord.orderClosePrice}}
@@ -44,6 +44,7 @@
 
 <script>
 import E from '../../../utils'
+import moment from "moment";
 
 const orderTypes = [
   {
@@ -102,6 +103,10 @@ export default {
         return 'active'
       }
     },
+      // 获取昨日的开始结束时间
+      getDateTime: function(date) {
+          return moment(date).format("YYYY-MM-DD HH:mm:ss")
+      },
     getOrderType: function(dicKey) {
         if (dicKey === null || dicKey === undefined || dicKey === '') {
             return ''

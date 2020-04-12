@@ -95,7 +95,7 @@ const config = {
       chunkFilename: '[id].[hash].css'
     }),
     new HtmlWebpackPlugin({
-      favicon: path.join(__dirname, '../src/assets/images/favicon.ico'),
+      favicon: path.join(__dirname, '../src/assets/images/fengxian.png'),
       template: path.join(__dirname, '../src/index.html'),
       filename: 'index.html'
     })

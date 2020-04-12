@@ -179,7 +179,7 @@ export default {
         params.introducer = this.introducerDecode(this.request.introducer)
       E.handleRequest(E.api().post('admin/registered', params))
         .then(res => {
-          if (res.data.code !== 0) {
+          if (res.data.code && res.data.code !== 0) {
             this.$message.warning(res.data.message)
           } else {
             const storage = window.localStorage

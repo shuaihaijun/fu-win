@@ -50,7 +50,7 @@ export default {
         let params = JSON.parse(userInfo)
         E.handleRequest(E.api().post('admin/logout', params))
             .then(res => {
-                if (res.data.code === 200001) {
+                if (res.data.code && res.data.code !== 0) {
                     this.$message.warning(res.data.message)
                 } else {
                     window.localStorage.removeItem('follow_user_info')
@@ -123,7 +123,7 @@ export default {
     position: absolute
     top: 100%
     right: -10px
-    background-color: #fff
+    background-color: #282828
     display: none
     border-top: 1px solid #e9e9e9
 
@@ -131,13 +131,14 @@ export default {
       min-width: 100px
       height: 50px
       align-content: center
+      color: #e9e9e9
       line-height: 50px
       padding: 0 20px
       border-bottom: 1px solid #e9e9e9
       cursor: pointer
 
       &:hover
-        color: #409EFF
+          background-color: #696969
 
       &:last-child
         border-bottom: none

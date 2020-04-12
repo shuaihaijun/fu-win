@@ -22,17 +22,17 @@
       .trading-list-card-content
         .trading-list-card-list
           .trading-list-card-list-item
-            .trading-list-card-list-label 近13周最大回撤
+            .trading-list-card-list-label 近三个月最大回撤
             .trading-list-card-list-balue {{info.historyWithdraw*100}}%
           .trading-list-card-list-item
-            .trading-list-card-list-label 实盘跟随总额
-            .trading-list-card-list-balue {{info.followsTradeAmount}}
+            .trading-list-card-list-label 实盘总额
+            .trading-list-card-list-balue ${{info.balance}}
           .trading-list-card-list-item
-            .trading-list-card-list-label 跟随者收益
-            .trading-list-card-list-balue ${{info.followsProfit}}
+            .trading-list-card-list-label 当前收益
+            .trading-list-card-list-balue ${{info.profit}}
           .trading-list-card-list-item
-            .trading-list-card-list-label 交易周数
-            .trading-list-card-list-balue {{info.tradeWeeks}}
+            .trading-list-card-list-label 入住时间
+            .trading-list-card-list-balue {{getDay(info.createDate)}}
       .trading-list-card-footer.trading(
         v-if="type === 'trading'"
       )
@@ -50,6 +50,7 @@
 <script>
 import _config from '../../../base_config'
 import avatar from '../../../assets/images/avatar-default.svg'
+import moment from "moment";
 
 export default {
   data() {
@@ -77,7 +78,11 @@ export default {
             if (this.type === 'trading') {
                 this.detailUrl = '/trading_strategy/detail/' + this.info.signalId
             }
-        }
+        },
+        // 获取昨日的开始结束时间
+        getDay: function(date) {
+            return moment(date).format("YYYY-MM-DD")
+        },
     }
 }
 </script>

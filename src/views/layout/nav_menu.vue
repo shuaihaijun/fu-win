@@ -8,6 +8,23 @@
         :class="menuActive(m.name)"
         @click="routeTo(m.name)"
       ) {{m.text}}
+        .menu-item-icon(
+            v-if="m.child"
+        )
+            .menu-item-icon-img
+            img(
+                src="../../assets/images/down.svg"
+                )
+        .menu-item-arrow(
+            v-if="m.child"
+        )
+            .menu-item-arrow-item(
+                v-for="c in m.child"
+                :key="c.path"
+                :to="c.path"
+                :class="menuActive(c.name)"
+                @click="routeTo(c.name)"
+              ) {{c.text}}
 </template>
 
 <script>
@@ -27,6 +44,58 @@ export default {
           path: '/trading_strategy',
           name: 'tradingStrategy'
         },
+        {
+          text: '交易资讯',
+          path: '',
+          name: '',
+          child: [
+              {
+                  text: '财经日历',
+                  path: '/message/finance_message',
+                  name: 'financeMessage'
+              },
+              {
+                  text: '闪电数据',
+                  path: '/message/market_message',
+                  name: 'marketMessage'
+              },
+              {
+                  text: '投资情绪',
+                  name: ''
+              },
+              {
+                  text: '机构订单',
+                  path: '',
+                  name: ''
+              }
+          ]
+        },
+        {
+          text: '交易学院',
+          name: '#',
+          child: [
+              {
+                  text: '外汇学院',
+                  name: '#'
+              },
+              {
+                  text: '外汇百科',
+                  name: '#'
+              },
+              {
+                  text: '外汇问卷',
+                  name: '#'
+              }
+          ]
+        },
+          {
+              text: '量化交易',
+              name: '#'
+          },
+          {
+              text: '期货跟投',
+              name: '#'
+          },
         {
           text: '关于我们',
           path: '/about',
@@ -56,6 +125,9 @@ export default {
       }
     },
     routeTo(name) {
+        if(name === '' || name === '#' || name === null ||name === undefined){
+            return
+        }
       if(name === 'crm'){
           let newUrl = this.crmUrl
           const userInfo = window.localStorage.getItem('follow_user_info')
@@ -90,12 +162,31 @@ export default {
     padding: 0 12px
     cursor: pointer
     font-size: 15px
-
+    &:hover .menu-item-arrow-item
+      display: block
     &:hover
       background-color: #696969
-
     &.active
       color: #409EFF
+    &-icon
+      display: inline-flex
+      margin: 0 0 0 5px
+    &-arrow
+      border-radius: 30%
+      width: 120px
+      position: absolute
+      margin-left: -12px
+      &-item
+        margin: 1px 0 0 0
+        height: 40px
+        text-align: center
+        line-height: 40px
+        font-size: 14px
+        display: none
+        background: #282828
+        &:hover
+          background-color: #696969
+
 </style>
 
 

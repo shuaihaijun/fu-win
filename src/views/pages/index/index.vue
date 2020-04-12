@@ -12,7 +12,6 @@
           )
             router-link.index-header-btn-item(to="/user/registe") 在线申请
             router-link.index-header-btn-item(to="/user/login") 登录
-
       .index-trading
         .index-trading-signal-title 优秀的交易信号
         .index-trading-signal-sub-title 使用业界领先的自动跟单系统，直接复制高手交易。如果您有成熟的交易技巧，也可以加入我们，赢取您成功交易的额外收益！

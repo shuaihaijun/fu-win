@@ -161,8 +161,6 @@ export default {
           this.chartsRadarData.series[0].data[0].value[2] = result.nonFlukeProfitScore
           this.chartsRadarData.series[0].data[0].value[3] = result.fundSizeScore
           this.chartsRadarData.series[0].data[0].value[4] = result.riskControlScore
-
-          console.log(this.chartsRadarData)
         })
     },
     // 获取昨日的开始结束时间

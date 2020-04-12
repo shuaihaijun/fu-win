@@ -49,8 +49,7 @@ export default {
 
       E.handleRequest(E.api().post('admin/login', this.request))
         .then(res => {
-
-          if (res.data.code === 200001) {
+          if (res.data.code && res.data.code !== 0) {
             this.$message.warning(res.data.message)
           } else {
             const storage = window.localStorage

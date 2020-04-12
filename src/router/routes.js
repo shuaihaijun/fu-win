@@ -43,6 +43,30 @@ export default [
     ]
   },
   {
+    path: '/message',
+    component: () => import('../views/pages/message/finance.vue'),
+    name: 'message',
+    meta: {
+      title: '交易资讯'
+    }
+  },
+  {
+    path: '/message/market_message',
+    component: () => import('../views/pages/message/market.vue'),
+    name: 'marketMessage',
+    meta: {
+      title: '闪电数据'
+    }
+  },
+  {
+    path: '/message/finance_message',
+    component: () => import('../views/pages/message/finance.vue'),
+    name: 'financeMessage',
+    meta: {
+      title: '财经日志'
+    }
+  },
+  {
     path: '/about',
     component: () => import('../views/pages/about/about.vue'),
     name: 'about',
