@@ -70,31 +70,17 @@ export default {
               }
           ]
         },
-        {
-          text: '交易学院',
-          name: '#',
-          child: [
-              {
-                  text: '外汇学院',
-                  name: '#'
-              },
-              {
-                  text: '外汇百科',
-                  name: '#'
-              },
-              {
-                  text: '外汇问卷',
-                  name: '#'
-              }
-          ]
-        },
+          {
+              text: '交易学院',
+              name: 'school'
+          },
           {
               text: '量化交易',
-              name: '#'
+              name: 'quantization'
           },
           {
               text: '期货跟投',
-              name: '#'
+              name: 'futures'
           },
         {
           text: '关于我们',

@@ -10,12 +10,10 @@
       .sub-table
         .sub-table-header
           .sub-table-header-item 跟随者
-          .sub-table-header-item 服务器
+          .sub-table-header-item 经纪商
           .sub-table-header-item 订阅时间
-          .sub-table-header-item 杠杆
-          .sub-table-header-item 余额
+          .sub-table-header-item 订阅天数
           .sub-table-header-item 收益
-          .sub-table-header-item 净值
         .sub-table-body(
           v-if="subList.length > 0"
         )
@@ -23,12 +21,10 @@
             v-for="sub in subList"
           )
             .sub-table-body-td {{sub.refName}}
-            .sub-table-body-td.wrap {{sub.userServerName}}
+            .sub-table-body-td {{getBroker(sub.userServerName)}}
             .sub-table-body-td {{getDay(sub.createDate)}}
-            .sub-table-body-td {{sub.leverage}}
-            .sub-table-body-td {{sub.balance}}
-            .sub-table-body-td {{sub.profit}}
-            .sub-table-body-td {{sub.equity}}
+            .sub-table-body-td {{dateDiff(sub.createDate)}}
+            .sub-table-body-td {{sub.profit}} $
         .sub-table-body.emety(
           v-else
         ) 没有数据
@@ -81,6 +77,22 @@ export default {
       // 获取昨日的开始结束时间
       getDay: function(date) {
           return moment(date).format("YYYY-MM-DD")
+      },
+      // 获取指定日期(字符串类型)到当前时间的天数 sDate1 格式:2018-01-04
+    dateDiff : function(sDate1) {
+        sDate1 =this.getDay(sDate1)
+        var date2 = new Date()
+        var date1 = new Date(Date.parse(sDate1.replace(/-/g,   "/")))
+        var iDays = parseInt(Math.abs(date2.getTime()- date1.getTime()) /1000/60/60/24)
+        return iDays
+    },
+      // 获取昨日的开始结束时间
+      getBroker: function(data) {
+        if (data !==null && data!== "") {
+            return data.substr(0,data.indexOf("-"))
+        }else {
+            return ""
+        }
       },
     subTypeSelectHandler(val) {
       this.subRequest.ruleState = val

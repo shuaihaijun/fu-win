@@ -13,7 +13,7 @@
           ) {{info.username}}
           .trading-list-card-level(
             v-if="type === 'trading'"
-          ) {{info.level}}
+          ) {{getLevel(info.level)}}
           .trading-list-card-server {{info.brokerName}}
         .trading-list-card-avatar
           img(
@@ -22,17 +22,17 @@
       .trading-list-card-content
         .trading-list-card-list
           .trading-list-card-list-item
-            .trading-list-card-list-label 近三个月最大回撤
-            .trading-list-card-list-balue {{info.historyWithdraw*100}}%
-          .trading-list-card-list-item
-            .trading-list-card-list-label 实盘总额
+            .trading-list-card-list-label 账户余额
             .trading-list-card-list-balue ${{info.balance}}
           .trading-list-card-list-item
-            .trading-list-card-list-label 当前收益
+            .trading-list-card-list-label 账户收益
             .trading-list-card-list-balue ${{info.profit}}
           .trading-list-card-list-item
-            .trading-list-card-list-label 入住时间
-            .trading-list-card-list-balue {{getDay(info.createDate)}}
+            .trading-list-card-list-label 账户杠杆
+            .trading-list-card-list-balue ${{info.leverage}}
+          .trading-list-card-list-item
+            .trading-list-card-list-label 订阅人数
+            .trading-list-card-list-balue {{info.signalFollows}}
       .trading-list-card-footer.trading(
         v-if="type === 'trading'"
       )
@@ -83,6 +83,20 @@ export default {
         getDay: function(date) {
             return moment(date).format("YYYY-MM-DD")
         },
+        // 获取昨日的开始结束时间
+        getLevel: function(data) {
+            if (data === '1' || data === 1) {
+                return 'A'
+            } else if (data === '2' || data === 2) {
+                return 'B'
+            } else if (data === '3' || data === 3) {
+                return 'C'
+            } else if (data === '4' || data === 4) {
+                return 'D'
+            } else  {
+                return 'A'
+            }
+        }
     }
 }
 </script>

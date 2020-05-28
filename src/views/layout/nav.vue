@@ -68,7 +68,8 @@ export default {
     box-shadow: 0 1px 0 0 #e6e6e6
 
     &.transparent
-      background-color: transparent
+      background-color: #010001
+      /*background-color: transparent*/
       box-shadow: none
 
   &-content

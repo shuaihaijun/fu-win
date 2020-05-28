@@ -135,7 +135,7 @@ export default {
       bottom: 0
 
     &-bk
-      background: linear-gradient(123deg,rgba(0,2,9,.79),#000)
+      background: linear-gradient(123deg, rgba(152, 162, 193, 0.79), rgba(12, 12, 12, 0.3))
       opacity: .7
 
     &-content

@@ -13,7 +13,7 @@
               )
               .trading-detail-content-header-body-level(
                 v-if="valuation !== null"
-              ) {{valuation.level}}
+              ) {{getLevel(valuation.level)}}
           .trading-detail-content-header-body-right
             .trading-detail-content-header-body-item
               .trading-detail-content-header-body-item-title 账户承诺
@@ -25,16 +25,10 @@
             .trading-detail-content-header-body-item
               .trading-detail-content-header-body-item-title 信号源简介
               .trading-detail-content-header-body-item-context {{summary.signalDesc}}
-            .trading-detail-content-header-body-item
-              .trading-detail-content-header-body-item-title 交易团队
-              .trading-detail-content-header-body-item-context {{summary.signalTem}}
         .trading-detail-content-header-footer
           .trading-detail-content-header-footer-item
-            .trading-detail-content-header-footer-value {{summary.monthlyAverageIncome*100}}%
-            .trading-detail-content-header-footer-label 收益率
-          .trading-detail-content-header-footer-item
-            .trading-detail-content-header-footer-value {{summary.historyWithdraw*100}}%
-            .trading-detail-content-header-footer-label 最大回撤
+            .trading-detail-content-header-footer-value {{summary.profit}}
+            .trading-detail-content-header-footer-label 收益
           .trading-detail-content-header-footer-item
             .trading-detail-content-header-footer-value {{summary.balance}}
             .trading-detail-content-header-footer-label 账户当前余额
@@ -44,6 +38,9 @@
           .trading-detail-content-header-footer-item
             .trading-detail-content-header-footer-value {{summary.signalFollows}}
             .trading-detail-content-header-footer-label 当前订阅人数
+          .trading-detail-content-header-footer-item
+            .trading-detail-content-header-footer-value {{getDay(summary.createDate)}}
+            .trading-detail-content-header-footer-label 入住时间
       .trading-detail-content-body
         .trading-detail-content-tab
           .trading-detail-content-tab-item(
@@ -154,7 +151,6 @@ export default {
       }))
         .then(res => {
           const result = res.data.content
-
           this.valuation = result
           this.chartsRadarData.series[0].data[0].value[0] = result.steadyScore
           this.chartsRadarData.series[0].data[0].value[1] = result.profitScore
@@ -167,6 +163,23 @@ export default {
     getYesterday() {
       this.yesterDay = moment(moment().add(-1, 'days').startOf("day").valueOf()).format("YYYY-MM-DD");
     },
+      // 获取昨日的开始结束时间
+      getDay: function(date) {
+          return moment(date).format("YYYY-MM-DD")
+      },
+      getLevel: function(data) {
+          if (data === '1' || data === 1) {
+              return 'A'
+          } else if (data === '2' || data === 2) {
+              return 'B'
+          } else if (data === '3' || data === 3) {
+              return 'C'
+          } else if (data === '4' || data === 4) {
+              return 'D'
+          } else {
+              return 'A'
+          }
+      },
     tabActive(val) {
       if (val === this.tabSelected) {
         return 'active'

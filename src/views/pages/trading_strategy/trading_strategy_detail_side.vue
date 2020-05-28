@@ -5,19 +5,19 @@
       .trading-detail-side-info
         .trading-detail-side-info-top
           .trading-detail-side-info-name # {{summary.signalId}} 交易员
-          .trading-detail-side-info-level A
+          .trading-detail-side-info-level {{getLevel(summary.level)}}
         .trading-detail-side-info-bottom
           .trading-detail-side-info-item
-            .trading-detail-side-info-label 年化收益率
-            .trading-detail-side-info-value {{summary.annualizedExpectedReturn*100}}%
+            .trading-detail-side-info-label 账户余额
+            .trading-detail-side-info-value {{summary.balance}}
           .trading-detail-side-info-item
-            .trading-detail-side-info-label 月均收益
-            .trading-detail-side-info-value {{summary.monthlyAverageIncome*100}}%
+            .trading-detail-side-info-label 账户收益
+            .trading-detail-side-info-value {{summary.profit}}
           .trading-detail-side-info-item
-            .trading-detail-side-info-label 历史最大回撤
-            .trading-detail-side-info-value {{summary.historyWithdraw*100}}%
+            .trading-detail-side-info-label 账户杠杆
+            .trading-detail-side-info-value 1:{{summary.leverage}}
           .trading-detail-side-info-item
-            .trading-detail-side-info-label 累计订阅
+            .trading-detail-side-info-label 订阅人数
             .trading-detail-side-info-value {{summary.signalFollows}}
       .trading-detail-side-disclaimer
         .trading-detail-side-disclaimer-title 重要免责声明
@@ -29,6 +29,22 @@ export default {
     props: {
         summary: {
             type: Object
+        }
+    },
+    methods: {
+        // 获取昨日的开始结束时间
+        getLevel: function(data) {
+            if (data === '1' || data === 1) {
+                return 'A'
+            } else if (data === '2' || data === 2) {
+                return 'B'
+            } else if (data === '3' || data === 3) {
+                return 'C'
+            } else if (data === '4' || data === 4) {
+                return 'D'
+            } else {
+                return 'A'
+            }
         }
     }
 }
