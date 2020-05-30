@@ -95,6 +95,8 @@ export default {
                 .then(res => {
                     if (res.data.status !== 0) {
                         this.$message.warning(res.data.msg)
+                        window.localStorage.removeItem('follow_user_info')
+                        this.$router.go(0)
                     } else {
                         const storage = window.localStorage
                         storage.setItem('follow_user_info', JSON.stringify(res.data.content.data))
@@ -168,7 +170,7 @@ export default {
         width: 200px
         height: 65px
         line-height: 65px
-        background: #409EFF
+        background: rgba(0, 0, 0, 0.45);
         cursor: pointer
 
   &-trading
