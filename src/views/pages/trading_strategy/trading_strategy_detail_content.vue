@@ -2,6 +2,8 @@
   #e-trading-strategy-detail-content
     .trading-detail-content-container
       .trading-detail-content-header
+        .trading-detail-content-header-right
+          .trading-detail-content-header-right-btn 免费订阅
         .trading-detail-content-header-title 交易员
         .trading-detail-content-header-body
           .trading-detail-content-header-body-left
@@ -210,6 +212,21 @@ export default {
       font-size: 16px
       font-weight: 600
       border-bottom: 1px solid #e9e9e9
+
+    &-right
+      &-btn
+        font-size: 14px
+        color: #409EFF
+        border-radius: 16px
+        border: 1px solid #409EFF
+        margin: 10px 15px auto
+        padding: 5px 12px
+        cursor: pointer
+        transition: all ease .3s
+        float: right
+        &:hover
+            background-color: #409EFF
+            color: #fff
 
     &-body
       display: flex

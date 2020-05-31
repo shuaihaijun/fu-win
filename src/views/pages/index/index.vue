@@ -96,7 +96,6 @@ export default {
                     if (res.data.status !== 0) {
                         this.$message.warning(res.data.msg)
                         window.localStorage.removeItem('follow_user_info')
-                        this.$router.go(0)
                     } else {
                         const storage = window.localStorage
                         storage.setItem('follow_user_info', JSON.stringify(res.data.content.data))
