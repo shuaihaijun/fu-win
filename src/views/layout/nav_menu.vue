@@ -58,15 +58,6 @@ export default {
                   text: '闪电数据',
                   path: '/message/market_message',
                   name: 'marketMessage'
-              },
-              {
-                  text: '投资情绪',
-                  name: ''
-              },
-              {
-                  text: '机构订单',
-                  path: '',
-                  name: ''
               }
           ]
         },
