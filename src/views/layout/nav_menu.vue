@@ -29,6 +29,7 @@
 
 <script>
 import _config from '../../base_config'
+import E from "../../utils";
 export default {
   data() {
     return {
@@ -110,9 +111,15 @@ export default {
           const userInfo = window.localStorage.getItem('follow_user_info')
           if (userInfo !== null) {
               let userData = JSON.parse(userInfo)
+              this.getProjectInfo(userData.userId)
               if (userData.token !==null) {
-                  newUrl = newUrl + '?token='+userData.token
+                  newUrl = this.crmUrl + '?token='+userData.token
+              }else {
+                  this.$message.warning('获取用户信息失败！')
               }
+          }else {
+              this.$message.warning('请先登录！')
+              return;
           }
         window.open(newUrl)
       } else {
@@ -120,7 +127,22 @@ export default {
               name
           })
       }
-    }
+    },
+      // 所属项目工程信息
+      getProjectInfo(userId) {
+          let params = {
+              userId: userId // 操作用户id
+          }
+          let data = {
+              params
+          }
+          return E.handleRequest(E.api().post('/permission/project/queryDetailByCondition', data))
+              .then(res => {
+                  if(res.content.projCrmRealm!==null && res.content.projCrmRealm!==''){
+                      this.crmUrl = res.content.projCrmRealm
+                  }
+              })
+      }
   }
 }
 </script>
