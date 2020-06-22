@@ -107,13 +107,13 @@ export default {
             return
         }
       if(name === 'crm'){
-          let newUrl = this.crmUrl
+          let newUrl = ''
           const userInfo = window.localStorage.getItem('follow_user_info')
           if (userInfo !== null) {
               let userData = JSON.parse(userInfo)
               this.getProjectInfo(userData.userId)
               if (userData.token !==null) {
-                  newUrl = this.crmUrl + '?token='+userData.token
+                  newUrl = this.crmUrl + '/login' + '?token='+userData.token
               }else {
                   this.$message.warning('获取用户信息失败！')
               }

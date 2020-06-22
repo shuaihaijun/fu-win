@@ -7,7 +7,9 @@ import 'element-ui/lib/theme-chalk/index.css'
 Vue.use(ElementUI)
 // 基础样式
 import './assets/styles/global.sass'
-
+// echarts图标引入
+import echarts from 'echarts'
+Vue.prototype.$echarts = echarts
 // 基础配置
 import _config from './base_config'
 Vue.prototype._config = _config

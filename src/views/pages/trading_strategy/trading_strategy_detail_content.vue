@@ -30,7 +30,7 @@
         .trading-detail-content-header-footer
           .trading-detail-content-header-footer-item
             .trading-detail-content-header-footer-value {{summary.profit}}
-            .trading-detail-content-header-footer-label 收益
+            .trading-detail-content-header-footer-label 当前收益
           .trading-detail-content-header-footer-item
             .trading-detail-content-header-footer-value {{summary.balance}}
             .trading-detail-content-header-footer-label 账户当前余额
@@ -61,6 +61,10 @@
               Summary(
                 :summary="summary"
               )
+            .trading-detail-content-body-report
+              ProfitLoss(
+                :summary="summary"
+              )
         .trading-detail-content-tab-context(
           v-if="tabSelected === 1"
         )
@@ -76,6 +80,7 @@ import EchartsRadar from '../../components/charts_radar.vue'
 import Summary from './trading_strategy_detail_summary.vue'
 import Order from './trading_strategy_detail_order.vue'
 import Subscription from './trading_strategy_detail_subscription.vue'
+import ProfitLoss from './trading_strategy_detail_profitLoss.vue'
 import E from '../../../utils'
 import moment from "moment";
 
@@ -138,6 +143,7 @@ export default {
     EchartsRadar,
     Summary,
     Order,
+    ProfitLoss,
     Subscription
   },
   created() {
@@ -295,6 +301,13 @@ export default {
 
   &-body
     background-color: #fff
+    &-report
+      display: flex
+      line-height: 50px
+      padding: 50px 0 0 30px
+      font-size: 16px
+      font-weight: 600
+      border-bottom: 1px solid #e9e9e9
 
   &-tab
     display: flex
