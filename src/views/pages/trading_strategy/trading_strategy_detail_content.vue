@@ -18,31 +18,31 @@
               ) {{getLevel(valuation.level)}}
           .trading-detail-content-header-body-right
             .trading-detail-content-header-body-item
-              .trading-detail-content-header-body-item-title 账户承诺
+              .trading-detail-content-header-body-item-title 账户信息
               .trading-detail-content-header-body-item-context
                 span.label 最大回撤
-                span.value < {{summary.historyWithdraw*100}}%
-                span.label 已遵守天数
-                span.value 9周
+                span.value {{getPersent(summary.withdrawMaxRate)}}
+                span.label 最大回撤金额
+                span.value {{summary.withdraw}}
             .trading-detail-content-header-body-item
               .trading-detail-content-header-body-item-title 信号源简介
               .trading-detail-content-header-body-item-context {{summary.signalDesc}}
         .trading-detail-content-header-footer
           .trading-detail-content-header-footer-item
-            .trading-detail-content-header-footer-value {{summary.profit}}
-            .trading-detail-content-header-footer-label 当前收益
+            .trading-detail-content-header-footer-value {{getPersent(orderSumData.orderIncome/summary.deposit)}}
+            .trading-detail-content-header-footer-label 绝对收益
           .trading-detail-content-header-footer-item
-            .trading-detail-content-header-footer-value {{summary.balance}}
-            .trading-detail-content-header-footer-label 账户当前余额
+            .trading-detail-content-header-footer-value {{getPersent(orderSumData.orderProfitRate)}}
+            .trading-detail-content-header-footer-label 准确率
           .trading-detail-content-header-footer-item
-            .trading-detail-content-header-footer-value {{summary.equity}}
-            .trading-detail-content-header-footer-label 账户当前净值
+            .trading-detail-content-header-footer-value {{getPersent(summary.profit/summary.balance)}}
+            .trading-detail-content-header-footer-label 实时盈利率
           .trading-detail-content-header-footer-item
-            .trading-detail-content-header-footer-value {{summary.signalFollows}}
-            .trading-detail-content-header-footer-label 当前订阅人数
+            .trading-detail-content-header-footer-value {{orderSumData.orderLoss}}
+            .trading-detail-content-header-footer-label 总亏损
           .trading-detail-content-header-footer-item
-            .trading-detail-content-header-footer-value {{getDay(summary.createDate)}}
-            .trading-detail-content-header-footer-label 入住时间
+            .trading-detail-content-header-footer-value {{orderSumData.tradeDaySum}}
+            .trading-detail-content-header-footer-label 交易天数
       .trading-detail-content-body
         .trading-detail-content-tab
           .trading-detail-content-tab-item(
@@ -137,7 +137,10 @@ export default {
   props: {
     summary: {
       type: Object
-    }
+    },
+      orderSumData: {
+          type: Object
+      }
   },
   components: {
     EchartsRadar,
@@ -195,7 +198,15 @@ export default {
     },
     selectTabHandler(val) {
       this.tabSelected = val
-    }
+    },
+      getPersent: function(value) {
+          if (value === null || value==='' || value === undefined) {
+              return ''
+          } else {
+              let persent = (value * 100).toFixed(2)
+              return persent + '%'
+          }
+      }
   }
 }
 </script>

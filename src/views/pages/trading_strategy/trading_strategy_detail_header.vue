@@ -15,7 +15,7 @@
                 .trading-detail-header-info-item-value {{summary.balance}}
                 .trading-detail-header-info-item-label 余额
               .trading-detail-header-info-item
-                .trading-detail-header-info-item-value {{summary.profit}}
+                .trading-detail-header-info-item-value {{orderSumData.orderIncome}}
                 .trading-detail-header-info-item-label 收益
               .trading-detail-header-info-item
                 .trading-detail-header-info-item-value 1:{{summary.leverage}}
@@ -37,7 +37,10 @@ export default {
   props: {
     summary: {
       type: Object
-    }
+    },
+      orderSumData: {
+          type: Object
+      }
   }
 }
 </script>

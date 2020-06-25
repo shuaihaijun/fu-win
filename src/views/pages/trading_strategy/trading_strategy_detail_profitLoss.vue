@@ -38,10 +38,17 @@ export default {
         }
     },
     mounted() {
+        this.userId = this.summary.userId
+        this.mtAccId = this.summary.mtAccId
       this.getprofitLossData()
+        this.setProfitLossCharts()
+        this.setProfitCharts()
     },
     methods: {
         getprofitLossData() {
+            if(this.userId === '' || this.mtAccId === '' ){
+                return
+            }
             let params = {
                 userId: this.userId,
                 mtAccId: this.mtAccId
@@ -53,15 +60,16 @@ export default {
                 .then(res => {
                     if(res.data !== undefined&&res.data !== null&&res.data.content !== undefined&&res.data.content !== null){
                         this.orderFlowData = res.data.content.data
-                        for ( let i=0 ; i<this.orderFlowData.length; i++) {
-                            this.dateList[i] =moment(this.orderFlowData[i].tradeDate).format("YYYY-MM-DD")
-                            this.winList[i] = this.orderFlowData[i].orderProfit
-                            this.lossList[i] = this.orderFlowData[i].orderLoss
-                            this.incomeList[i] = this.orderFlowData[i].orderIncome
-                            if(i === 0){
-                                this.profitList[i] = this.orderFlowData[i].orderIncome
+                        let size = this.orderFlowData.length-1
+                        for ( let i=size ; i>=0; i--) {
+                            this.dateList[size-i] =moment(this.orderFlowData[i].tradeDate).format("YYYY-MM-DD")
+                            this.winList[size-i] = this.orderFlowData[i].orderProfit
+                            this.lossList[size-i] = this.orderFlowData[i].orderLoss
+                            this.incomeList[size-i] = this.orderFlowData[i].orderIncome
+                            if(i === size){
+                                this.profitList[size-i] = this.orderFlowData[i].orderIncome
                             }else {
-                                this.profitList[i] = this.profitList[i-1] + this.orderFlowData[i].orderIncome
+                                this.profitList[size-i] = this.profitList[size-i-1] + this.orderFlowData[i].orderIncome
                             }
                         }
                         this.setProfitLossCharts()
@@ -150,6 +158,7 @@ export default {
                         name:"累计收益",
                         type: "line",  //pie->饼状图  line->折线图  bar->柱状图
                         data: this.profitList,
+                        smooth: true,
                         color: ['#409eff']
                     },
                     {

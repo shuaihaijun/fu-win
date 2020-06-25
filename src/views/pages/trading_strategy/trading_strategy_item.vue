@@ -26,10 +26,10 @@
             .trading-list-card-list-balue ${{info.balance}}
           .trading-list-card-list-item
             .trading-list-card-list-label 账户收益
-            .trading-list-card-list-balue ${{info.profit}}
+            .trading-list-card-list-balue {{orderProfitRate}}
           .trading-list-card-list-item
-            .trading-list-card-list-label 账户杠杆
-            .trading-list-card-list-balue ${{info.leverage}}
+            .trading-list-card-list-label 累计收益
+            .trading-list-card-list-balue {{orderIncome}}
           .trading-list-card-list-item
             .trading-list-card-list-label 订阅人数
             .trading-list-card-list-balue {{info.signalFollows}}
@@ -51,12 +51,18 @@
 import _config from '../../../base_config'
 import avatar from '../../../assets/images/avatar-default.svg'
 import moment from "moment";
+import E from "../../../utils";
 
 export default {
   data() {
     return {
       url: _config.BASE_URL,
       avatar,
+        orderSumData: {},
+        orderProfitRate: 1,
+        orderIncome: 0,
+        userId: '',
+        mtAccId: '',
       detailUrl: ''
     }
   },
@@ -72,7 +78,31 @@ export default {
     created() {
         this.getDetailUrl()
     },
+    mounted() {
+        this.userId = this.info.userId
+        this.mtAccId = this.info.mtAccId
+        this.getOrderSumData()
+    },
     methods: {
+        getOrderSumData() {
+            let params = {
+                userId: this.userId,
+                mtAccId: this.mtAccId
+            }
+            let data = {
+                params
+            }
+            return E.handleRequest(E.api().post('report/order/getOrderSum', data))
+                .then(res => {
+                    this.orderSumData = res.data.content
+                    if (this.orderSumData !== undefined && this.orderSumData !== null && this.orderSumData.orderIncome !== undefined && this.info.deposit !== 0) {
+                        this.orderProfitRate = this.orderSumData.orderIncome / this.info.deposit
+                        this.orderIncome = this.orderSumData.orderIncome
+                    }
+                    let persent = (this.orderProfitRate * 100).toFixed(2)
+                    this.orderProfitRate = persent + '%'
+                })
+        },
         // 交易汇总
         getDetailUrl() {
             if (this.type === 'trading') {

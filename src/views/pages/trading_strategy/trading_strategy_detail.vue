@@ -3,6 +3,7 @@
     .e-container.trading-detail
       DetailHeader(
           :summary="summary"
+          :orderSumData="orderSumData"
         )
       .trading-detail-container
         DetailSide(
@@ -10,6 +11,7 @@
         )
         DetailConternt(
           :summary="summary"
+          :orderSumData="orderSumData"
         )
 </template>
 
@@ -24,7 +26,8 @@ export default {
     return {
       signalId: '',
       valuation: {},
-      summary: {}
+      summary: {},
+      orderSumData: {}
     }
   },
   components: {
@@ -32,9 +35,8 @@ export default {
     DetailSide,
     DetailConternt
   },
-  created() {
+  mounted() {
     this.signalId = this.$route.params.id
-
     this.getSummaryData()
   },
   methods: {
@@ -45,8 +47,22 @@ export default {
       }))
         .then(res => {
           this.summary = res.data.content.data[0]
+            this.getOrderSumData()
         })
-    }
+    },
+      getOrderSumData() {
+          let params = {
+              userId: this.summary.userId,
+              mtAccId: this.summary.mtAccId
+          }
+          let data = {
+              params
+          }
+          return E.handleRequest(E.api().post('report/order/getOrderSum', data))
+              .then(res => {
+                  this.orderSumData = res.data.content
+              })
+      }
   }
 }
 </script>

@@ -3,115 +3,115 @@
 
     .trading-detail-summary-table-item
       .trading-detail-summary-table-label 累计交易手数
-      .trading-detail-summary-table-value {{orderSumData.orderLots}}
+      .trading-detail-summary-table-value {{orderReportData.orderLots}}
     .trading-detail-summary-table-item
       .trading-detail-summary-table-label 日均交易手数
-      .trading-detail-summary-table-value {{orderSumData.orderLotsDaily}}
+      .trading-detail-summary-table-value {{orderReportData.orderLotsDaily}}
     .trading-detail-summary-table-item
       .trading-detail-summary-table-label 盈利手数
-      .trading-detail-summary-table-value {{orderSumData.orderProfitLots}}
+      .trading-detail-summary-table-value {{orderReportData.orderProfitLots}}
     .trading-detail-summary-table-item
       .trading-detail-summary-table-label 亏损手数
-      .trading-detail-summary-table-value {{orderSumData.orderLossLots}}
+      .trading-detail-summary-table-value {{orderReportData.orderLossLots}}
 
     .trading-detail-summary-table-item
       .trading-detail-summary-table-label 累计交易笔数
-      .trading-detail-summary-table-value {{orderSumData.orderCount}}
+      .trading-detail-summary-table-value {{orderReportData.orderCount}}
     .trading-detail-summary-table-item
       .trading-detail-summary-table-label 日均交易笔数数
-      .trading-detail-summary-table-value {{orderSumData.orderCountDaily}}
+      .trading-detail-summary-table-value {{orderReportData.orderCountDaily}}
     .trading-detail-summary-table-item
       .trading-detail-summary-table-label 盈利笔数
-      .trading-detail-summary-table-value {{orderSumData.orderProfitCount}}
+      .trading-detail-summary-table-value {{orderReportData.orderProfitCount}}
     .trading-detail-summary-table-item
       .trading-detail-summary-table-label 亏损笔数
-      .trading-detail-summary-table-value {{orderSumData.orderLossCount}}
+      .trading-detail-summary-table-value {{orderReportData.orderLossCount}}
 
     .trading-detail-summary-table-item
       .trading-detail-summary-table-label 累计收益
-      .trading-detail-summary-table-value {{orderSumData.orderIncome}}
+      .trading-detail-summary-table-value {{orderReportData.orderIncome}}
     .trading-detail-summary-table-item
       .trading-detail-summary-table-label 交易胜率
-      .trading-detail-summary-table-value {{getPersent(orderSumData.orderWinRate)}}
+      .trading-detail-summary-table-value {{getPersent(orderReportData.orderWinRate)}}
     .trading-detail-summary-table-item
       .trading-detail-summary-table-label 盈利金额
-      .trading-detail-summary-table-value {{orderSumData.orderProfit}}
+      .trading-detail-summary-table-value {{orderReportData.orderProfit}}
     .trading-detail-summary-table-item
       .trading-detail-summary-table-label 亏损金额
-      .trading-detail-summary-table-value {{orderSumData.orderLoss}}
+      .trading-detail-summary-table-value {{orderReportData.orderLoss}}
 
     .trading-detail-summary-table-item
       .trading-detail-summary-table-label 收益率
-      .trading-detail-summary-table-value {{getPersent(orderSumData.orderIncomeRate)}}
+      .trading-detail-summary-table-value {{getPersent(orderReportData.orderIncomeRate)}}
     .trading-detail-summary-table-item
       .trading-detail-summary-table-label 净值盈亏比
-      .trading-detail-summary-table-value {{getPersent(orderSumData.orderPlRate)}}
+      .trading-detail-summary-table-value {{getPersent(orderReportData.orderPlRate)}}
     .trading-detail-summary-table-item
       .trading-detail-summary-table-label 盈利手数占比
-      .trading-detail-summary-table-value {{getPersent(orderSumData.orderProfitRate)}}
+      .trading-detail-summary-table-value {{getPersent(orderReportData.orderProfitRate)}}
     .trading-detail-summary-table-item
       .trading-detail-summary-table-label 亏损手数占比
-      .trading-detail-summary-table-value {{getPersent(orderSumData.orderLossRate)}}
+      .trading-detail-summary-table-value {{getPersent(orderReportData.orderLossRate)}}
 
     .trading-detail-summary-table-item
       .trading-detail-summary-table-label 初始交易时间
-      .trading-detail-summary-table-value {{getDay(orderSumData.beginDate)}}
+      .trading-detail-summary-table-value {{getDay(orderReportData.beginDate)}}
     .trading-detail-summary-table-item
       .trading-detail-summary-table-label 平均持仓时间
-      .trading-detail-summary-table-value {{Math.round(orderSumData.orderHoldTimeAvg / 3600)}} 小时
+      .trading-detail-summary-table-value {{Math.round(orderReportData.orderHoldTimeAvg / 3600)}} 小时
     .trading-detail-summary-table-item
       .trading-detail-summary-table-label 每笔平均盈利
-      .trading-detail-summary-table-value {{orderSumData.orderProfitAvg}}
+      .trading-detail-summary-table-value {{orderReportData.orderProfitAvg}}
     .trading-detail-summary-table-item
       .trading-detail-summary-table-label 每笔平均亏损
-      .trading-detail-summary-table-value {{orderSumData.orderLossAvg}}
+      .trading-detail-summary-table-value {{orderReportData.orderLossAvg}}
 
     .trading-detail-summary-table-item
       .trading-detail-summary-table-label 累计交易天数
-      .trading-detail-summary-table-value {{orderSumData.tradeDaySum}}
+      .trading-detail-summary-table-value {{orderReportData.tradeDaySum}}
     .trading-detail-summary-table-item
       .trading-detail-summary-table-label 预期回报
-      .trading-detail-summary-table-value {{orderSumData.orderExpectedReturn}}
+      .trading-detail-summary-table-value {{orderReportData.orderExpectedReturn}}
     .trading-detail-summary-table-item
       .trading-detail-summary-table-label 单笔最大获利
-      .trading-detail-summary-table-value {{orderSumData.orderProfitMax}}
+      .trading-detail-summary-table-value {{orderReportData.orderProfitMax}}
     .trading-detail-summary-table-item
       .trading-detail-summary-table-label 单笔最大亏损
-      .trading-detail-summary-table-value {{orderSumData.orderLossMax}}
+      .trading-detail-summary-table-value {{orderReportData.orderLossMax}}
 
     .trading-detail-summary-table-item
-      .trading-detail-summary-table-label 杠杆
-      .trading-detail-summary-table-value {{summary.leverage}}
+      .trading-detail-summary-table-label 入金
+      .trading-detail-summary-table-value {{summary.deposit}}
     .trading-detail-summary-table-item
       .trading-detail-summary-table-label 累计手续费
-      .trading-detail-summary-table-value {{orderSumData.orderSwap}}
+      .trading-detail-summary-table-value {{orderReportData.orderSwap}}
     .trading-detail-summary-table-item
-      .trading-detail-summary-table-label 日连续最大获利天
-      .trading-detail-summary-table-value {{orderSumData.orderProfitKeepCount}}
+      .trading-detail-summary-table-label 日最大连续获利天
+      .trading-detail-summary-table-value {{orderReportData.orderProfitKeepCount}}
     .trading-detail-summary-table-item
-      .trading-detail-summary-table-label 日连亏损利天
-      .trading-detail-summary-table-value {{orderSumData.orderLossKeepCount}}
+      .trading-detail-summary-table-label 日最大连亏损利天
+      .trading-detail-summary-table-value {{orderReportData.orderLossKeepCount}}
 
     .trading-detail-summary-table-item
-      .trading-detail-summary-table-label 净值
-      .trading-detail-summary-table-value {{summary.equity}}
+      .trading-detail-summary-table-label 出金
+      .trading-detail-summary-table-value {{summary.withdraw}}
     .trading-detail-summary-table-item
       .trading-detail-summary-table-label 累计隔夜息
-      .trading-detail-summary-table-value {{orderSumData.orderCommission}}
+      .trading-detail-summary-table-value {{orderReportData.orderCommission}}
     .trading-detail-summary-table-item
-      .trading-detail-summary-table-label 日连续最大获利
-      .trading-detail-summary-table-value {{orderSumData.orderProfitKeep}}
+      .trading-detail-summary-table-label 日最大连续获利
+      .trading-detail-summary-table-value {{orderReportData.orderProfitKeep}}
     .trading-detail-summary-table-item
-      .trading-detail-summary-table-label 日连续最大亏损
-      .trading-detail-summary-table-value {{orderSumData.orderLossKeep}}
+      .trading-detail-summary-table-label 日最大连续亏损
+      .trading-detail-summary-table-value {{orderReportData.orderLossKeep}}
 
 </template>
 
 <script>
-import E from "../../../utils";
-import moment from "moment";
+    import moment from "moment";
+    import E from "../../../utils";
 
-export default {
+    export default {
   props: {
     summary: {
       type: Object
@@ -119,35 +119,34 @@ export default {
   },
     data() {
         return {
-            orderSumData: {},
+            orderReportData: {},
             userId: '',
             mtAccId: ''
         }
     },
     watch: {
         summary: function(v1) {
-            this.userId = this.summary.userId
-            this.mtAccId = this.summary.mtAccId
-            this.getOrderSumData()
+            this.getorderReportData()
         }
-   },
+    },
     mounted() {
-        this.userId = this.summary.userId
-        this.mtAccId = this.summary.mtAccId
-        this.getOrderSumData()
+        this.getorderReportData()
     },
     methods: {
-        getOrderSumData() {
+        getorderReportData() {
+            if(this.summary === undefined || this.summary === null || this.summary === ''|| this.summary.userId === undefined){
+                return
+            }
             let params = {
-                userId: this.userId,
-                mtAccId: this.mtAccId
+                userId: this.summary.userId,
+                mtAccId: this.summary.mtAccId
             }
             let data = {
                 params
             }
             return E.handleRequest(E.api().post('report/order/getOrderSum', data))
                 .then(res => {
-                    this.orderSumData = res.data.content
+                    this.orderReportData = res.data.content
                 })
         },
         getDay: function(date) {
