@@ -77,13 +77,18 @@ export default {
       }
     }
   },
+    props: {
+        summary: {
+            type: Object
+        }
+    },
   created() {
     this.orderRequest.signalId = this.$route.params.id
-    this.getOrderData()
+    this.getOrderHistoryData()
   },
   methods: {
     // 订单列表
-    getOrderData() {
+      getOrderHistoryData() {
         let params = this.orderRequest
         let pageInfoHelper = {
             pageSize: 20,
@@ -95,9 +100,39 @@ export default {
         }
       return E.handleRequest(E.api().post('orderSignal/queryUserSignalOrder', data))
         .then(res => {
-          this.order = res.data.content.data
+            if(res.data.content === null ||res.data.content===undefined ||res.data.content===''){
+                this.$message.warning('无历史交易订单！')
+            }else {
+                this.order = res.data.content.data
+            }
         })
     },
+      // 获取持仓信息
+      getOrderHoldData() {
+          let params = {
+              operUserId: this.summary.userId,
+              userId: this.summary.userId,
+              mtAccId: this.summary.mtAccId
+          }
+          let pageInfoHelper = {
+              pageSize: 20,
+              pageNo: 1
+          }
+          let data = {
+              params,
+              pageInfoHelper
+          }
+          console.log(data)
+          return E.handleRequest(E.api().post('orderCustomer/getMTAliveOrders', data))
+              .then(res => {
+                  if(res.data.content === null ||res.data.content===undefined ||res.data.content===''){
+                      this.$message.warning('无在仓订单！')
+                  }else {
+                      console.log(res.data.content.data)
+                      this.order = res.data.content.data
+                  }
+              })
+      },
     activeClass(val) {
       if (val === this.orderRequest.orderState) {
         return 'active'
@@ -120,7 +155,12 @@ export default {
     },
     orderTypeSelectHandler(val) {
       this.orderRequest.orderState = val
-      this.getOrderData()
+        if(val === 0){
+            this.getOrderHistoryData()
+        }else {
+            this.getOrderHoldData()
+        }
+
     }
   }
 }

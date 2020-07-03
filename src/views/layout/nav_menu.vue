@@ -116,6 +116,7 @@ export default {
                   newUrl = this.crmUrl + '/login' + '?token='+userData.token
               }else {
                   this.$message.warning('获取用户信息失败！')
+                  return
               }
           }else {
               this.$message.warning('请先登录！')

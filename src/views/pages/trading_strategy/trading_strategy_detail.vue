@@ -60,6 +60,10 @@ export default {
           }
           return E.handleRequest(E.api().post('report/order/getOrderSum', data))
               .then(res => {
+                  if(res.data===null||res.data.content==null){
+                      this.$message.warning('信号源数据还未同步，请稍后再试！')
+                      return
+                  }
                   this.orderSumData = res.data.content
               })
       }

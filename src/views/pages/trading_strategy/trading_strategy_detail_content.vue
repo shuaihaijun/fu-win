@@ -3,7 +3,9 @@
     .trading-detail-content-container
       .trading-detail-content-header
         .trading-detail-content-header-right
-          .trading-detail-content-header-right-btn 免费订阅
+          .trading-detail-content-header-right-btn(
+            @click="followBook"
+          ) 免费订阅
         .trading-detail-content-header-title 交易员
         .trading-detail-content-header-body
           .trading-detail-content-header-body-left
@@ -38,11 +40,11 @@
             .trading-detail-content-header-footer-value {{getPersent(summary.profit/summary.balance)}}
             .trading-detail-content-header-footer-label 实时盈利率
           .trading-detail-content-header-footer-item
-            .trading-detail-content-header-footer-value {{orderSumData.orderLoss}}
-            .trading-detail-content-header-footer-label 总亏损
+            .trading-detail-content-header-footer-value {{getDay(orderSumData.beginDate)}}
+            .trading-detail-content-header-footer-label 开始交易时间
           .trading-detail-content-header-footer-item
             .trading-detail-content-header-footer-value {{orderSumData.tradeDaySum}}
-            .trading-detail-content-header-footer-label 交易天数
+            .trading-detail-content-header-footer-label 实际交易天数
       .trading-detail-content-body
         .trading-detail-content-tab
           .trading-detail-content-tab-item(
@@ -68,7 +70,9 @@
         .trading-detail-content-tab-context(
           v-if="tabSelected === 1"
         )
-          Order
+          Order(
+            :summary="summary"
+          )
         .trading-detail-content-tab-context(
           v-if="tabSelected === 2"
         )
@@ -76,6 +80,7 @@
 </template>
 
 <script>
+import _config from '../../../base_config'
 import EchartsRadar from '../../components/charts_radar.vue'
 import Summary from './trading_strategy_detail_summary.vue'
 import Order from './trading_strategy_detail_order.vue'
@@ -129,6 +134,7 @@ export default {
     return {
       chartsRadarData,
       tabs,
+      crmUrl:_config.CRM_URL,
       yesterDay:0,
       tabSelected: 0,
       valuation: null
@@ -177,6 +183,41 @@ export default {
       // 获取昨日的开始结束时间
       getDay: function(date) {
           return moment(date).format("YYYY-MM-DD")
+      },
+      followBook() {
+          let newUrl = ''
+          const userInfo = window.localStorage.getItem('follow_user_info')
+          if (userInfo !== null) {
+              let userData = JSON.parse(userInfo)
+              this.getProjectInfo(userData.userId)
+              if (userData.token !==null) {
+                  newUrl = this.crmUrl + '/login' + '?token='+userData.token
+              }else {
+                  this.$message.warning('获取用户信息失败！')
+                  return;
+              }
+              window.open(newUrl)
+          }else {
+              this.$message.warning('请先登录！')
+              return;
+          }
+      },
+      // 所属项目工程信息
+      getProjectInfo(userId) {
+          let params = {
+              userId: userId // 操作用户id
+          }
+          let data = {
+              params
+          }
+          console.log(data)
+          return E.handleRequest(E.api().post('/permission/project/queryDetailByCondition', data))
+              .then(res => {
+                  console.log(res)
+                  if(res.data.content.projCrmRealm!==undefined || res.data.content.projCrmRealm!==null && res.data.content.projCrmRealm!==''){
+                      this.crmUrl = res.data.content.projCrmRealm
+                  }
+              })
       },
       getLevel: function(data) {
           if (data === '1' || data === 1) {
