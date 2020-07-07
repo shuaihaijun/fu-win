@@ -12,6 +12,7 @@
         DetailConternt(
           :summary="summary"
           :orderSumData="orderSumData"
+          :signalValuationData="signalValuationData"
         )
 </template>
 
@@ -27,6 +28,7 @@ export default {
       signalId: '',
       valuation: {},
       summary: {},
+      signalValuationData: {},
       orderSumData: {}
     }
   },
@@ -47,6 +49,8 @@ export default {
       }))
         .then(res => {
           this.summary = res.data.content.data[0]
+            this.signalValuationData.depositMaxRate = this.summary.depositMaxRate
+            this.signalValuationData.withdrawMaxRate = this.summary.withdrawMaxRate
             this.getOrderSumData()
         })
     },
@@ -65,6 +69,9 @@ export default {
                       return
                   }
                   this.orderSumData = res.data.content
+                  this.signalValuationData.tradeDaySum = this.orderSumData.tradeDaySum
+                  this.signalValuationData.orderProfitRate = this.orderSumData.orderProfitRate
+                  this.signalValuationData.orderLossRate = this.orderSumData.orderLossRate
               })
       }
   }

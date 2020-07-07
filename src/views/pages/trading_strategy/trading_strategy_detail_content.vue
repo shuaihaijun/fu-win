@@ -107,11 +107,11 @@ const tabs = [
 const chartsRadarData = {
   radar: {
     indicator: [
-      {name: '稳健性'},
-      {name: '盈利能力'},
-      {name: '非侥幸获利'},
-      {name: '资金规模'},
-      {name: '风控能力'},
+        {name: '盈利交易', max: 1},
+        {name: '亏损交易', max: 1},
+      {name: '交易天数', max: 1000},
+      {name: '最大入金', max: 1},
+      {name: '最大出金', max: 1},
     ]
   },
   series: [
@@ -146,6 +146,9 @@ export default {
     },
       orderSumData: {
           type: Object
+      },
+      signalValuationData: {
+          type: Object
       }
   },
   components: {
@@ -160,21 +163,32 @@ export default {
     this.getYesterday()
     this.getValuationData()
   },
+    // watch: {
+    //     signalValuationData: {
+    //         handler: function () {
+    //             console.log(this.signalValuationData)
+    //             this.chartsRadarData.series[0].data[0].value = this.signalValuationData
+    //             this.valuation = this.signalValuationData
+    //         },
+    //         immediate:true
+    //     }
+    // },
   methods: {
     // 评估数据
     getValuationData() {
-      return E.handleRequest(E.api().post('signal/getSignalValuation', {
-        signalId: this.signalId
-      }))
-        .then(res => {
-          const result = res.data.content
-          this.valuation = result
-          this.chartsRadarData.series[0].data[0].value[0] = result.steadyScore
-          this.chartsRadarData.series[0].data[0].value[1] = result.profitScore
-          this.chartsRadarData.series[0].data[0].value[2] = result.nonFlukeProfitScore
-          this.chartsRadarData.series[0].data[0].value[3] = result.fundSizeScore
-          this.chartsRadarData.series[0].data[0].value[4] = result.riskControlScore
-        })
+        console.log(this.signalValuationData)
+      this.valuation = this.signalValuationData
+        this.chartsRadarData.series[0].data[0].value[0] = this.signalValuationData.orderProfitRate
+        this.chartsRadarData.series[0].data[0].value[1] = this.signalValuationData.orderLossRate
+      this.chartsRadarData.series[0].data[0].value[2] = this.signalValuationData.tradeDaySum
+      this.chartsRadarData.series[0].data[0].value[3] = this.signalValuationData.depositMaxRate
+      this.chartsRadarData.series[0].data[0].value[4] = this.signalValuationData.withdrawMaxRate
+
+        this.chartsRadarData.radar.indicator[0].name = this.chartsRadarData.radar.indicator[0].name + ': ' + this.getPersent(this.signalValuationData.orderProfitRate)
+        this.chartsRadarData.radar.indicator[1].name = this.chartsRadarData.radar.indicator[1].name + ': ' + this.getPersent(this.signalValuationData.orderLossRate)
+        this.chartsRadarData.radar.indicator[2].name = this.chartsRadarData.radar.indicator[2].name + ': ' + this.signalValuationData.tradeDaySum +'/1000'
+        this.chartsRadarData.radar.indicator[3].name = this.chartsRadarData.radar.indicator[3].name + ': ' + this.getPersent(this.signalValuationData.depositMaxRate)
+        this.chartsRadarData.radar.indicator[4].name = this.chartsRadarData.radar.indicator[4].name + ': ' + this.getPersent(this.signalValuationData.withdrawMaxRate)
     },
     // 获取昨日的开始结束时间
     getYesterday() {

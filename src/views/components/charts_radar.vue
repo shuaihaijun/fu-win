@@ -22,7 +22,7 @@ export default {
       id: `chart-radar-${E.fn.createId()}`,
       chartStyle: {
         width: '100%',
-        height: '200px'
+        height: '220px'
       }
     }
   },
@@ -38,6 +38,7 @@ export default {
   watch: {
     chartsRadarData: {
       handler: function () {
+        console.log(this.chartsRadarData)
         this.myChart.setOption(this.chartsRadarData)
       },
       deep: true
