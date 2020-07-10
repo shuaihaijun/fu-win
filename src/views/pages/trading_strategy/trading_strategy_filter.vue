@@ -27,7 +27,7 @@
             :class="checkAllClass('level')"
             @click="checkClear('level')"
           ) 全部
-          .trading-filter-item-checkbox-group.e-flex.e-flex1
+          .trading-filter-item-checkbox-group.e-flex.e-flex2
             label.trading-filter-item-checkbox(
               v-for="l in level"
               @click="checkFilter('level', l)"
@@ -41,7 +41,7 @@
             :class="checkAllClass('rate')"
             @click="checkClear('rate')"
           ) 全部
-          .trading-filter-item-checkbox-group.e-flex.e-flex1
+          .trading-filter-item-checkbox-group.e-flex.e-flex3
             label.trading-filter-item-checkbox(
               v-for="r in rate"
               @click="checkFilter('rate', r)"
@@ -263,6 +263,10 @@ export default {
       align-items: center
       cursor: pointer
       margin-right: 30px
+
+      &-group.e-flex.e-flex1
+        flex-wrap: wrap
+        line-height: 30px
 
       &.active .trading-filter-item-checkbox-inner
         background-color: #409EFF

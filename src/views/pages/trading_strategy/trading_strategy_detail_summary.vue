@@ -6,7 +6,7 @@
       .trading-detail-summary-table-value {{orderReportData.orderLots}}
     .trading-detail-summary-table-item
       .trading-detail-summary-table-label 日均交易手数
-      .trading-detail-summary-table-value {{orderReportData.orderLotsDaily}}
+      .trading-detail-summary-table-value {{getDouble(orderReportData.orderLotsDaily,2)}}
     .trading-detail-summary-table-item
       .trading-detail-summary-table-label 盈利手数
       .trading-detail-summary-table-value {{orderReportData.orderProfitLots}}
@@ -18,8 +18,8 @@
       .trading-detail-summary-table-label 累计交易笔数
       .trading-detail-summary-table-value {{orderReportData.orderCount}}
     .trading-detail-summary-table-item
-      .trading-detail-summary-table-label 日均交易笔数数
-      .trading-detail-summary-table-value {{orderReportData.orderCountDaily}}
+      .trading-detail-summary-table-label 日均交易笔数
+      .trading-detail-summary-table-value {{getDouble(orderReportData.orderCountDaily,2)}}
     .trading-detail-summary-table-item
       .trading-detail-summary-table-label 盈利笔数
       .trading-detail-summary-table-value {{orderReportData.orderProfitCount}}
@@ -45,7 +45,7 @@
       .trading-detail-summary-table-value {{getPersent(orderReportData.orderIncomeRate)}}
     .trading-detail-summary-table-item
       .trading-detail-summary-table-label 净值盈亏比
-      .trading-detail-summary-table-value {{getPersent(orderReportData.orderPlRate)}}
+      .trading-detail-summary-table-value {{getDouble(orderReportData.orderPlRate,2)}}
     .trading-detail-summary-table-item
       .trading-detail-summary-table-label 盈利手数占比
       .trading-detail-summary-table-value {{getPersent(orderReportData.orderProfitRate)}}
@@ -61,17 +61,17 @@
       .trading-detail-summary-table-value {{Math.round(orderReportData.orderHoldTimeAvg / 3600)}} 小时
     .trading-detail-summary-table-item
       .trading-detail-summary-table-label 每笔平均盈利
-      .trading-detail-summary-table-value {{orderReportData.orderProfitAvg}}
+      .trading-detail-summary-table-value {{getDouble(orderReportData.orderProfitAvg,2)}}
     .trading-detail-summary-table-item
       .trading-detail-summary-table-label 每笔平均亏损
-      .trading-detail-summary-table-value {{orderReportData.orderLossAvg}}
+      .trading-detail-summary-table-value {{getDouble(orderReportData.orderLossAvg,2)}}
 
     .trading-detail-summary-table-item
       .trading-detail-summary-table-label 累计交易天数
       .trading-detail-summary-table-value {{orderReportData.tradeDaySum}}
     .trading-detail-summary-table-item
       .trading-detail-summary-table-label 预期回报
-      .trading-detail-summary-table-value {{orderReportData.orderExpectedReturn}}
+      .trading-detail-summary-table-value {{getDouble(orderReportData.orderExpectedReturn,2)}}
     .trading-detail-summary-table-item
       .trading-detail-summary-table-label 单笔最大获利
       .trading-detail-summary-table-value {{orderReportData.orderProfitMax}}
@@ -83,8 +83,8 @@
       .trading-detail-summary-table-label 入金
       .trading-detail-summary-table-value {{summary.deposit}}
     .trading-detail-summary-table-item
-      .trading-detail-summary-table-label 累计手续费
-      .trading-detail-summary-table-value {{orderReportData.orderSwap}}
+      .trading-detail-summary-table-label 累计隔夜息
+      .trading-detail-summary-table-value {{orderReportData.orderCommission}}
     .trading-detail-summary-table-item
       .trading-detail-summary-table-label 日最大连续获利天
       .trading-detail-summary-table-value {{orderReportData.orderProfitKeepCount}}
@@ -96,8 +96,8 @@
       .trading-detail-summary-table-label 出金
       .trading-detail-summary-table-value {{summary.withdraw}}
     .trading-detail-summary-table-item
-      .trading-detail-summary-table-label 累计隔夜息
-      .trading-detail-summary-table-value {{orderReportData.orderCommission}}
+      .trading-detail-summary-table-label 累计手续费
+      .trading-detail-summary-table-value {{orderReportData.orderSwap}}
     .trading-detail-summary-table-item
       .trading-detail-summary-table-label 日最大连续获利
       .trading-detail-summary-table-value {{orderReportData.orderProfitKeep}}
@@ -158,6 +158,14 @@
             } else {
                 let persent = (value * 100).toFixed(2)
                 return persent + '%'
+            }
+        },
+        getDouble: function(value,dot) {
+            if (value === null || value==='' || value === undefined) {
+                return ''
+            } else {
+                let doubleValue = (value * 100).toFixed(dot)
+                return doubleValue
             }
         }
     }

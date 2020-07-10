@@ -37,7 +37,8 @@
 import BaseLayout from '../../layout/base_layout.vue'
 import TradingItem from '../trading_strategy/trading_strategy_item.vue'
 import questionItem from '../index/question.vue'
-import E from "../../../utils";
+import E from "../../../utils"
+import _config from '../../../base_config'
 
 export default {
   components: {
@@ -80,6 +81,7 @@ export default {
         const userInfo = storage.getItem('follow_user_info')
         if (userInfo !== null) {
             this.userInfo = JSON.parse(userInfo)
+            this.getProjectInfo(this.userInfo.userId)
         }
         this.getTradingList()
     },
@@ -113,6 +115,22 @@ export default {
                 .then(res => {
                     this.tradingList = res.data.content.data
                 })
+        },
+        // 所属项目工程信息
+        getProjectInfo(userId) {
+            let params = {
+                userId: userId // 操作用户id
+            }
+            let data = {
+                params
+            }
+            return E.handleRequest(E.api().post('/permission/project/queryDetailByCondition', data))
+                .then(res => {
+                    if(res.data.content.projCrmRealm !== null && res.data.content.projCrmRealm !== ''){
+                        _config.CRM_URL = res.data.content.projCrmRealm
+                    }
+                })
+            return ''
         }
     }
 }

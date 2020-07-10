@@ -14,7 +14,7 @@
           .trading-list-card-level(
             v-if="type === 'trading'"
           ) {{getLevel(info.level)}}
-          .trading-list-card-server {{info.brokerName}}
+          .trading-list-card-server {{getBroker(info.serverName)}}
         .trading-list-card-avatar
           img(
             :src="info.avatarUrl ? url + info.avatarUrl : avatar"
@@ -126,6 +126,16 @@ export default {
             } else  {
                 return 'A'
             }
+        },
+        // 获取昨日的开始结束时间
+        getBroker: function(serverName) {
+            if(serverName==undefined || serverName==null){
+                return ''
+            }
+            if(serverName.indexOf('-')>0){
+                return serverName.substr(0,serverName.indexOf('-'))
+            }
+            return serverName
         }
     }
 }

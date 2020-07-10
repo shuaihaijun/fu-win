@@ -111,9 +111,8 @@ export default {
           const userInfo = window.localStorage.getItem('follow_user_info')
           if (userInfo !== null) {
               let userData = JSON.parse(userInfo)
-              this.getProjectInfo(userData.userId)
               if (userData.token !==null) {
-                  newUrl = this.crmUrl + '/login' + '?token='+userData.token
+                  newUrl = _config.CRM_URL + '/login' + '?token='+userData.token
               }else {
                   this.$message.warning('获取用户信息失败！')
                   return
@@ -128,22 +127,7 @@ export default {
               name
           })
       }
-    },
-      // 所属项目工程信息
-      getProjectInfo(userId) {
-          let params = {
-              userId: userId // 操作用户id
-          }
-          let data = {
-              params
-          }
-          return E.handleRequest(E.api().post('/permission/project/queryDetailByCondition', data))
-              .then(res => {
-                  if(res.content.projCrmRealm!==null && res.content.projCrmRealm!==''){
-                      this.crmUrl = res.content.projCrmRealm
-                  }
-              })
-      }
+    }
   }
 }
 </script>
