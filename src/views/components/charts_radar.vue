@@ -38,7 +38,6 @@ export default {
   watch: {
     chartsRadarData: {
       handler: function () {
-        console.log(this.chartsRadarData)
         this.myChart.setOption(this.chartsRadarData)
       },
       deep: true
