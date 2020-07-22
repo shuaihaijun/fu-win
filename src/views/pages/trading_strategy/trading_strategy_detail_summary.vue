@@ -84,7 +84,7 @@
       .trading-detail-summary-table-value {{summary.deposit}}
     .trading-detail-summary-table-item
       .trading-detail-summary-table-label 累计隔夜息
-      .trading-detail-summary-table-value {{orderReportData.orderCommission}}
+      .trading-detail-summary-table-value {{orderReportData.orderSwap}}
     .trading-detail-summary-table-item
       .trading-detail-summary-table-label 日最大连续获利天
       .trading-detail-summary-table-value {{orderReportData.orderProfitKeepCount}}
@@ -97,7 +97,7 @@
       .trading-detail-summary-table-value {{summary.withdraw}}
     .trading-detail-summary-table-item
       .trading-detail-summary-table-label 累计手续费
-      .trading-detail-summary-table-value {{orderReportData.orderSwap}}
+      .trading-detail-summary-table-value {{orderReportData.orderCommission}}
     .trading-detail-summary-table-item
       .trading-detail-summary-table-label 日最大连续获利
       .trading-detail-summary-table-value {{orderReportData.orderProfitKeep}}

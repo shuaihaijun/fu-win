@@ -122,13 +122,11 @@ export default {
               params,
               pageInfoHelper
           }
-          console.log(data)
           return E.handleRequest(E.api().post('orderCustomer/getMTAliveOrders', data))
               .then(res => {
                   if(res.data.content === null ||res.data.content===undefined ||res.data.content===''){
                       this.$message.warning('无在仓订单！')
                   }else {
-                      console.log(res.data.content.data)
                       this.order = res.data.content.data
                   }
               })

@@ -250,10 +250,8 @@ export default {
           let data = {
               params
           }
-          console.log(data)
           return E.handleRequest(E.api().post('/permission/project/queryDetailByCondition', data))
               .then(res => {
-                  console.log(res)
                   if(res.data.content.projCrmRealm!==undefined || res.data.content.projCrmRealm!==null && res.data.content.projCrmRealm!==''){
                       this.crmUrl = res.data.content.projCrmRealm
                   }

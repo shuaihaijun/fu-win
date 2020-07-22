@@ -34,6 +34,7 @@
 import TradingFilter from './trading_strategy_filter.vue'
 import TradingItem from './trading_strategy_item.vue'
 import E from '../../../utils'
+import base_config from "../../../base_config";
 
 const filterLevel = [
   {
@@ -118,8 +119,17 @@ export default {
   methods: {
     // 交易员列表
     getTradingList() {
-      this.trandingRequest.pageSize = 8
-      return E.handleRequest(E.api().post('signal/querySignalUsers', this.trandingRequest))
+        let params = this.trandingRequest
+        params.projKey = base_config.PROJ_KEY
+        let pageInfoHelper = {
+            pageSize: 8,
+            pageNo: 1
+        }
+        let data = {
+            params,
+            pageInfoHelper
+        }
+      return E.handleRequest(E.api().post('signal/querySignalAllowedByProjKey', data))
         .then(res => {
           this.tradingList = res.data.content.data
         })

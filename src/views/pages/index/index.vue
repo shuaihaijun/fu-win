@@ -82,6 +82,10 @@ export default {
         if (userInfo !== null) {
             this.userInfo = JSON.parse(userInfo)
             this.getProjectInfo(this.userInfo.userId)
+        } else {
+            //根据域名 判断所属社区
+            let hostname = document.location.hostname
+            this.getProjectInfoByUrl(hostname)
         }
         this.getTradingList()
     },
@@ -128,9 +132,25 @@ export default {
                 .then(res => {
                     if(res.data.content.projCrmRealm !== null && res.data.content.projCrmRealm !== ''){
                         _config.CRM_URL = res.data.content.projCrmRealm
+                        _config.PROJ_KEY = res.data.content.projKkey
                     }
                 })
-            return ''
+        },
+        // 所属项目工程信息
+        getProjectInfoByUrl(hostname) {
+            let params = {
+                projOfficialRealm: hostname // 操作用户id
+            }
+            let data = {
+                params
+            }
+            return E.handleRequest(E.api().post('/permission/project/queryProjectByUrl', data))
+                .then(res => {
+                    if(res.data.content!=null&&res.data.content.projCrmRealm !== null && res.data.content.projCrmRealm !== ''){
+                        _config.CRM_URL = res.data.content.projCrmRealm
+                        _config.PROJ_KEY = res.data.content.projKkey
+                    }
+                })
         }
     }
 }
