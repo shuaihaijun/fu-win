@@ -132,7 +132,7 @@ export default {
                 .then(res => {
                     if(res.data.content.projCrmRealm !== null && res.data.content.projCrmRealm !== ''){
                         _config.CRM_URL = res.data.content.projCrmRealm
-                        _config.PROJ_KEY = res.data.content.projKkey
+                        _config.PROJ_KEY = res.data.content.projKey
                     }
                 })
         },
@@ -148,7 +148,7 @@ export default {
                 .then(res => {
                     if(res.data.content!=null&&res.data.content.projCrmRealm !== null && res.data.content.projCrmRealm !== ''){
                         _config.CRM_URL = res.data.content.projCrmRealm
-                        _config.PROJ_KEY = res.data.content.projKkey
+                        _config.PROJ_KEY = res.data.content.projKey
                     }
                 })
         }

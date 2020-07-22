@@ -129,7 +129,7 @@ export default {
             params,
             pageInfoHelper
         }
-      return E.handleRequest(E.api().post('signal/querySignalAllowedByProjKey', data))
+      return E.handleRequest(E.api().post('signal/querySignalUsersPermit', data))
         .then(res => {
           this.tradingList = res.data.content.data
         })
