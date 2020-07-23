@@ -120,7 +120,13 @@ export default {
     // 交易员列表
     getTradingList() {
         let params = this.trandingRequest
-        params.projKey = base_config.PROJ_KEY
+        const storage = window.localStorage
+        const projKey = storage.getItem('projKey')
+        if (projKey !== undefined && projKey !== null) {
+            params.projKey = projKey
+        }else {
+            params.projKey = 0
+        }
         let pageInfoHelper = {
             pageSize: 8,
             pageNo: 1

@@ -53,9 +53,7 @@ export default {
             this.$message.warning(res.data.message)
           } else {
             const storage = window.localStorage
-
             storage.setItem('follow_user_info', JSON.stringify(res.data.content.data))
-
             this.$router.push({
               name: 'index'
             })

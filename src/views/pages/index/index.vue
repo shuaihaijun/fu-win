@@ -87,7 +87,6 @@ export default {
             let hostname = document.location.hostname
             this.getProjectInfoByUrl(hostname)
         }
-        this.getTradingList()
     },
     methods: {
         getTokenLogin(token) {
@@ -114,8 +113,23 @@ export default {
         },
         // 交易员列表
         getTradingList() {
-            this.trandingRequest.pageSize = 4
-            return E.handleRequest(E.api().post('signal/querySignalUsers', this.trandingRequest))
+            let params = {}
+            const storage = window.localStorage
+            const projKey = storage.getItem('projKey')
+            if (projKey !== undefined && projKey !== null) {
+                params.projKey = projKey
+            }else {
+                params.projKey = 0
+            }
+            let pageInfoHelper = {
+                pageSize: 4,
+                pageNo: 1
+            }
+            let data = {
+                params,
+                pageInfoHelper
+            }
+            return E.handleRequest(E.api().post('signal/querySignalUsersPermit', data))
                 .then(res => {
                     this.tradingList = res.data.content.data
                 })
@@ -133,7 +147,10 @@ export default {
                     if(res.data.content.projCrmRealm !== null && res.data.content.projCrmRealm !== ''){
                         _config.CRM_URL = res.data.content.projCrmRealm
                         _config.PROJ_KEY = res.data.content.projKey
+                        const storage = window.localStorage
+                        storage.setItem('projKey', res.data.content.projKey)
                     }
+                    this.getTradingList()
                 })
         },
         // 所属项目工程信息
@@ -149,7 +166,10 @@ export default {
                     if(res.data.content!=null&&res.data.content.projCrmRealm !== null && res.data.content.projCrmRealm !== ''){
                         _config.CRM_URL = res.data.content.projCrmRealm
                         _config.PROJ_KEY = res.data.content.projKey
+                        const storage = window.localStorage
+                        storage.setItem('projKey', res.data.content.projKey)
                     }
+                    this.getTradingList()
                 })
         }
     }

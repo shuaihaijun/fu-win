@@ -85,6 +85,9 @@ export default {
     },
     methods: {
         getOrderSumData() {
+            if(this.userId =='' || this.userId== undefined||this.mtAccId==''||this.mtAccId==undefined){
+                return
+            }
             let params = {
                 userId: this.userId,
                 mtAccId: this.mtAccId
