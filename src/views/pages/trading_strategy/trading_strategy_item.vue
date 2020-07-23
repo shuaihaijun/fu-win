@@ -30,7 +30,9 @@
           .trading-list-card-list-item
             .trading-list-card-list-label 累计收益
             .trading-list-card-list-balue {{orderIncome}}
-          .trading-list-card-list-item
+          .trading-list-card-list-item(
+            v-if="type === 'trading'"
+          )
             .trading-list-card-list-label 订阅人数
             .trading-list-card-list-balue {{info.signalFollows}}
       .trading-list-card-footer.trading(

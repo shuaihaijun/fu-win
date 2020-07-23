@@ -54,6 +54,7 @@ export default {
                     this.$message.warning(res.data.message)
                 } else {
                     window.localStorage.removeItem('follow_user_info')
+                    window.localStorage.removeItem('projKey')
                     this.$router.go(0)
                 }
             })

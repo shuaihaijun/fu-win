@@ -31,12 +31,11 @@
 </template>
 
 <script>
-import TradingFilter from './trading_strategy_filter.vue'
-import TradingItem from './trading_strategy_item.vue'
-import E from '../../../utils'
-import base_config from "../../../base_config";
+    import TradingFilter from './trading_strategy_filter.vue'
+    import TradingItem from './trading_strategy_item.vue'
+    import E from '../../../utils'
 
-const filterLevel = [
+    const filterLevel = [
   {
     label: 'S',
     value: 'S'
@@ -142,7 +141,23 @@ export default {
     },
     // 跟随大师列表
     getFollowList() {
-      return E.handleRequest(E.api().post('signal/queryFollowUsers', this.followRequest))
+        let params = {}
+        const storage = window.localStorage
+        const projKey = storage.getItem('projKey')
+        if (projKey !== undefined && projKey !== null) {
+            params.projKey = projKey
+        }else {
+            params.projKey = 0
+        }
+        let pageInfoHelper = {
+            pageSize: 8,
+            pageNo: 1
+        }
+        let data = {
+            params,
+            pageInfoHelper
+        }
+      return E.handleRequest(E.api().post('signal/queryProjectFollowUsers', data))
         .then(res => {
           this.followList = res.data.content.data
         })

@@ -35,10 +35,26 @@ export default {
   methods: {
     // 跟随大师列表
     getFollowList() {
-      return E.handleRequest(E.api().post('signal/queryFollowUsers', this.followRequest))
-        .then(res => {
-          this.followList = res.data.content.data
-        })
+        let params = {}
+        const storage = window.localStorage
+        const projKey = storage.getItem('projKey')
+        if (projKey !== undefined && projKey !== null) {
+            params.projKey = projKey
+        }else {
+            params.projKey = 0
+        }
+        let pageInfoHelper = {
+            pageSize: 8,
+            pageNo: 1
+        }
+        let data = {
+            params,
+            pageInfoHelper
+        }
+        return E.handleRequest(E.api().post('signal/queryProjectFollowUsers', data))
+            .then(res => {
+                this.followList = res.data.content.data
+            })
     },
     back() {
       this.$router.go(-1)

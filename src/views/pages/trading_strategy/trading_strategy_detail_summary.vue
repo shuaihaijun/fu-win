@@ -164,7 +164,7 @@
             if (value === null || value==='' || value === undefined) {
                 return ''
             } else {
-                let doubleValue = (value * 100).toFixed(dot)
+                let doubleValue = value.toFixed(dot)
                 return doubleValue
             }
         }
