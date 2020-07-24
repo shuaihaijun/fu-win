@@ -150,7 +150,7 @@ export default {
             params.projKey = 0
         }
         let pageInfoHelper = {
-            pageSize: 8,
+            pageSize: 4,
             pageNo: 1
         }
         let data = {
