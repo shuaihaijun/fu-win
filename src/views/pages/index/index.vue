@@ -70,7 +70,8 @@ export default {
             trandingRequest: {
                 pageSize: 4,
                 pageNo: 1},
-            userInfo: null
+            userInfo: null,
+            projInfo: null
         }
     },
     created() {
@@ -115,9 +116,10 @@ export default {
         getTradingList() {
             let params = {}
             const storage = window.localStorage
-            const projKey = storage.getItem('projKey')
-            if (projKey !== undefined && projKey !== null) {
-                params.projKey = projKey
+            const projInfo = storage.getItem('projInfo')
+            if (projInfo !== undefined && projInfo !== null) {
+                this.projInfo = JSON.parse(projInfo)
+                params.projKey = this.projInfo.projKey
             }else {
                 params.projKey = 0
             }
@@ -148,7 +150,7 @@ export default {
                         _config.CRM_URL = res.data.content.projCrmRealm
                         _config.PROJ_KEY = res.data.content.projKey
                         const storage = window.localStorage
-                        storage.setItem('projKey', res.data.content.projKey)
+                        storage.setItem('projInfo', JSON.stringify(res.data.content))
                     }
                     this.getTradingList()
                 })
@@ -167,7 +169,7 @@ export default {
                         _config.CRM_URL = res.data.content.projCrmRealm
                         _config.PROJ_KEY = res.data.content.projKey
                         const storage = window.localStorage
-                        storage.setItem('projKey', res.data.content.projKey)
+                        storage.setItem('projInfo', JSON.stringify(res.data.content))
                     }
                     this.getTradingList()
                 })

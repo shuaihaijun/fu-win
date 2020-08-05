@@ -39,7 +39,7 @@
         v-if="type === 'trading'"
       )
         .trading-list-card-footer-left
-          span 累计订阅数
+          span 订阅模式
           span.num {{info.followsHistory}}
         .trading-list-card-footer-right
           .trading-list-card-footer-btn 免费订阅

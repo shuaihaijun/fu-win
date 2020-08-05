@@ -100,7 +100,8 @@ export default {
       brokerList: [],
       filterLevel,
       filterProfitRate,
-      filterBroker: []
+      filterBroker: [],
+        projInfo: null
     }
   },
   components: {
@@ -120,9 +121,10 @@ export default {
     getTradingList() {
         let params = this.trandingRequest
         const storage = window.localStorage
-        const projKey = storage.getItem('projKey')
-        if (projKey !== undefined && projKey !== null) {
-            params.projKey = projKey
+        const projInfo = storage.getItem('projInfo')
+        if (projInfo !== undefined && projInfo !== null) {
+            this.projInfo = JSON.parse(projInfo)
+            params.projKey = this.projInfo.projKey
         }else {
             params.projKey = 0
         }
@@ -143,9 +145,10 @@ export default {
     getFollowList() {
         let params = {}
         const storage = window.localStorage
-        const projKey = storage.getItem('projKey')
-        if (projKey !== undefined && projKey !== null) {
-            params.projKey = projKey
+        const projInfo = storage.getItem('projInfo')
+        if (projInfo !== undefined && projInfo !== null) {
+            this.projInfo = JSON.parse(projInfo)
+            params.projKey = this.projInfo.projKey
         }else {
             params.projKey = 0
         }

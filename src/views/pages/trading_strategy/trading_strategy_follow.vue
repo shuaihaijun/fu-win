@@ -23,7 +23,8 @@ export default {
   data() {
     return {
       followList: [],
-      followRequest: {}
+      followRequest: {},
+        projInfo: null
     }
   },
   components: {
@@ -37,9 +38,10 @@ export default {
     getFollowList() {
         let params = {}
         const storage = window.localStorage
-        const projKey = storage.getItem('projKey')
-        if (projKey !== undefined && projKey !== null) {
-            params.projKey = projKey
+        const projInfo = storage.getItem('projInfo')
+        if (projInfo !== undefined && projInfo !== null) {
+            this.projInfo = JSON.parse(projInfo)
+            params.projKey = this.projInfo.projKey
         }else {
             params.projKey = 0
         }
