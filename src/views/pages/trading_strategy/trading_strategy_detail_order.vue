@@ -11,6 +11,7 @@
         .order-table-header
           .order-table-header-item 品种
           .order-table-header-item 类别
+          .order-table-header-item 类型
           .order-table-header-item 手数
           .order-table-header-item 开仓时间
           .order-table-header-item 平仓时间
@@ -27,6 +28,7 @@
           )
             .order-table-body-td {{ord.orderSymbol}}
             .order-table-body-td {{getOrderType(ord.orderType)}}
+            .order-table-body-td {{getOrderOperation(ord.orderTradeOperation)}}
             .order-table-body-td {{ord.orderLots}}
             .order-table-body-td.wrap {{getDateTime(ord.orderOpenDate)}}
             .order-table-body-td.wrap {{getDateTime(ord.orderCloseDate)}}
@@ -71,6 +73,20 @@ export default {
               label: 'sell'
           }
       ],
+        orderTradeOperation: [
+        {
+            value: 0,
+            label: 'open'
+        },
+        {
+            value: 1,
+            label: 'close'
+        },
+            {
+                value: 2,
+                label: 'modify'
+            }
+        ],
       order: [],
       orderRequest: {
         orderState: 0
@@ -90,6 +106,7 @@ export default {
     // 订单列表
       getOrderHistoryData() {
         let params = this.orderRequest
+          params.orderTradeOperation = '0,1'
         let pageInfoHelper = {
             pageSize: 20,
             pageNo: 1
@@ -151,6 +168,17 @@ export default {
             }
         }
     },
+      getOrderOperation: function(dicKey) {
+          if (dicKey === null || dicKey === undefined || dicKey === '') {
+              return ''
+          }
+          let key = dicKey
+          for (let index = 0; index < this.orderTradeOperation.length; index++) {
+              if (key === this.orderTradeOperation[index].value) {
+                  return this.orderTradeOperation[index].label
+              }
+          }
+      },
     orderTypeSelectHandler(val) {
       this.orderRequest.orderState = val
         if(val === 0){
